@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Powerup
+  - Projectile
+  - Rock_Big
+  - Rock_Giant
+  - Rock_Medium
+  - Rock_Light
   layers:
   - Default
   - TransparentFX
