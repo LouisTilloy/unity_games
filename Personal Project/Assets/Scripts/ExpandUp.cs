@@ -7,6 +7,8 @@ public class ExpandUp : MonoBehaviour
 {
     [SerializeField]
     private float frameHeightIncrease;
+    [SerializeField]
+    private float maximumHeight;
 
     // Update is called once per frame
     void Update()
@@ -18,5 +20,10 @@ public class ExpandUp : MonoBehaviour
         // - Note: It so happens that increasing the scale by 1 increases the overall height by 2,
         // - meaning that one can just translate by the same number to keep the bottom at the same spot
         transform.position += frameHeightIncrease * Time.deltaTime * Vector3.up;
+
+        if (transform.position.y * 2 > maximumHeight)
+        {
+            Destroy(gameObject);
+        }
     }
 }

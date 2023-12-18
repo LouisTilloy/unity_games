@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.tag.Contains("Rock"))
         {
             Debug.Log("You're dead.");
         }

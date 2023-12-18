@@ -11,6 +11,7 @@ TagManager:
   - Rock_Giant
   - Rock_Medium
   - Rock_Light
+  - Wall
   layers:
   - Default
   - TransparentFX

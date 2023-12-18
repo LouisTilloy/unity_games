@@ -111,4 +111,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c8fe8ea8df3e1478cd5d5cf716caad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameHeightIncrease: 4
+  frameHeightIncrease: 8
+  maximumHeight: 9

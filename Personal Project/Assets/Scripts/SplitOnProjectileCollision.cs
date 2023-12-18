@@ -13,7 +13,6 @@ public class SplitOnProjectileCollision : MonoBehaviour
     {
         if (other.CompareTag("Projectile"))
         {
-            Debug.Log("Ball Destroyed!");
             ReplaceCurrentWithNewPrefabs();
             Destroy(other.gameObject);
         }
@@ -32,8 +31,6 @@ public class SplitOnProjectileCollision : MonoBehaviour
             case "Rock_Giant":
                 return 3;
         }
-        Debug.Log("gameObject.tag IS RIGHT BELOW");
-        Debug.Log(gameObject.tag);
         throw new ArgumentException();
     }
 
