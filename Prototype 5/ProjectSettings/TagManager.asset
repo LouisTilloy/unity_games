@@ -42,3 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Mouse Trail
+    uniqueID: 2173301687
+    locked: 0

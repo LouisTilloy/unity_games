@@ -28,9 +28,10 @@ public class Target : MonoBehaviour
         transform.position = new Vector3(randomRange(xPosRange), yPos);
     }
 
-    private void OnMouseDown()
+
+    private void OnMouseOver()
     {
-        if (!gameManager.isGameActive)
+        if (!gameManager.isGameActive || !Input.GetMouseButton(0))
         {
             return;
         }
@@ -45,7 +46,7 @@ public class Target : MonoBehaviour
         Destroy(gameObject);
         if (!CompareTag("Bad"))
         {
-            gameManager.GameOver();
+            gameManager.UpdateLives(-1);
         }
     }
 

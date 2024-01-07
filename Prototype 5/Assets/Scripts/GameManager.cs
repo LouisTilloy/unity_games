@@ -9,23 +9,14 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI livesText;
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartButton;
     public bool isGameActive;
     private int score;
+    private int lives;
     private float spawnRate = 1.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     IEnumerator SpawnTarget()
     {
@@ -43,7 +34,17 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
-    public void GameOver()
+    public void UpdateLives(int livesToAdd)
+    {
+        lives += livesToAdd;
+        livesText.text = "Lives: " + lives;
+
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+    }
+    private void GameOver()
     {
         restartButton.gameObject.SetActive(true);
         gameOverText.gameObject.SetActive(true);
@@ -52,6 +53,10 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        // Store current volume
+        AudioSource backgroundMusic = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AudioSource>();
+        GlobalMusicData.SetVolumeAndTime(backgroundMusic.volume, backgroundMusic.time);
+        // Reload scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
@@ -59,10 +64,12 @@ public class GameManager : MonoBehaviour
     {
         isGameActive = true;
         score = 0;
+        lives = 3;
         spawnRate /= difficulty;
 
         StartCoroutine(SpawnTarget());
         UpdateScore(0);
+        UpdateLives(0);
 
         titleScreen.SetActive(false);
     }
