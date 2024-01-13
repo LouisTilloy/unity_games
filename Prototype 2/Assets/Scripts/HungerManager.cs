@@ -16,15 +16,9 @@ public class HungerManager : MonoBehaviour
         destroyObjectDelay = 0.05f;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void FeedAnimalOnce()
     {
         hungerValue += 1;
-        // Debug.Log("hungerBarValue: " + hungerBarValue.ToString());
         if (hungerValue >= hungerLimit)
         {
             if (CompareTag("Animal"))

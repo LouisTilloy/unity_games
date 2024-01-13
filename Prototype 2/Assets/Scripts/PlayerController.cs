@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -26,11 +27,9 @@ public class PlayerController : MonoBehaviour
     public float powerUpShootAngles = 20.0f;
     public float piercingDelay = 0.25f;
     public float piercingTimer;
-    
+
     // Prefabs
-    public GameObject regularProjectilePrefab;
-    public GameObject piercingProjectilePrefab;
-    public GameObject currentProjectilePrefab;
+    public int currentProjectilePrefabIndex;
     private IEnumerator[] coroutines;
 
     // Start is called before the first frame update    
@@ -55,11 +54,11 @@ public class PlayerController : MonoBehaviour
         // Piercing pizza
         if (powerUpStates[1])
         {
-            currentProjectilePrefab = piercingProjectilePrefab;
+            currentProjectilePrefabIndex = 1;
         }
         else
         {
-            currentProjectilePrefab = regularProjectilePrefab;
+            currentProjectilePrefabIndex = 0;
         }
 
         // If the piercing projectile power is on, there is a minimum delay between each shot
@@ -177,9 +176,14 @@ public class PlayerController : MonoBehaviour
     // Shoot projectile with given X offset and angle
     void ShootProjectile(float angleInDegrees, float offsetX)
     {
-        Vector3 projectilePos = new Vector3(transform.position.x + offsetX, projectilePosY, transform.position.z);
-        GameObject projectileGameObject = (GameObject)Instantiate(currentProjectilePrefab, projectilePos, currentProjectilePrefab.transform.rotation);
-        projectileGameObject.transform.RotateAround(transform.position, Vector3.up, angleInDegrees);
+        GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledObject(currentProjectilePrefabIndex);
+        if (pooledProjectile != null)
+        {
+            pooledProjectile.SetActive(true); // activate it
+            pooledProjectile.transform.position = new Vector3(transform.position.x + offsetX, projectilePosY, transform.position.z);
+            pooledProjectile.transform.rotation = transform.rotation;
+            pooledProjectile.transform.RotateAround(transform.position, Vector3.up, angleInDegrees);
+        }
     }
 
     public void ApplyTemporaryPowerUp(int powerUpIndex)

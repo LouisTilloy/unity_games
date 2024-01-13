@@ -982,8 +982,8 @@ GameObject:
   m_Component:
   - component: {fileID: 534669905}
   - component: {fileID: 534669904}
-  - component: {fileID: 534669903}
   - component: {fileID: 534669907}
+  - component: {fileID: 534669903}
   m_Layer: 0
   m_Name: Player 1 Camera
   m_TagString: MainCamera
@@ -1244,7 +1244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 650954878}
   - component: {fileID: 650954881}
-  - component: {fileID: 650954880}
   - component: {fileID: 650954879}
   m_Layer: 0
   m_Name: Player 2 Camera
@@ -1281,14 +1280,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 953691733}
   offset: {x: 0, y: 6.5, z: -8}
---- !u!81 &650954880
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 650954877}
-  m_Enabled: 1
 --- !u!20 &650954881
 Camera:
   m_ObjectHideFlags: 0
@@ -1938,7 +1929,6 @@ GameObject:
   m_Component:
   - component: {fileID: 872443939}
   - component: {fileID: 872443938}
-  - component: {fileID: 872443937}
   - component: {fileID: 872443940}
   m_Layer: 0
   m_Name: Player 1 Driver Camera
@@ -1947,14 +1937,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &872443937
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 872443936}
-  m_Enabled: 1
 --- !u!20 &872443938
 Camera:
   m_ObjectHideFlags: 0
@@ -2554,7 +2536,6 @@ GameObject:
   m_Component:
   - component: {fileID: 986676026}
   - component: {fileID: 986676029}
-  - component: {fileID: 986676028}
   - component: {fileID: 986676027}
   m_Layer: 0
   m_Name: Player 2 Driver Camera
@@ -2590,14 +2571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 953691733}
---- !u!81 &986676028
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 986676025}
-  m_Enabled: 1
 --- !u!20 &986676029
 Camera:
   m_ObjectHideFlags: 0

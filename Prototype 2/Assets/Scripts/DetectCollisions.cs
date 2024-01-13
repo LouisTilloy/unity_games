@@ -6,17 +6,6 @@ public class DetectCollisions : MonoBehaviour
 {
     public GameObject player;
     private bool collided = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void markCollision(Collider other)
     {
@@ -44,7 +33,6 @@ public class DetectCollisions : MonoBehaviour
     {
         // Prevents objects from colliding twice
         if (
-            // collided ||
             (other.gameObject.GetComponent<DetectCollisions>() != null &&
              other.gameObject.GetComponent<DetectCollisions>().collided)
         )

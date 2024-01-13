@@ -8,11 +8,6 @@ public class DestroyOutOfBounds : MonoBehaviour
     private float topBound = 30.0f;
     private float lowerBound = -10.0f;
     private float sideBound = 50.0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     void destroyHungerBarIfExists()
     {
@@ -29,8 +24,8 @@ public class DestroyOutOfBounds : MonoBehaviour
         // Destroy object if it goes out of player view.
         if (transform.position.z > topBound)
         {
-            destroyHungerBarIfExists();
-            Destroy(gameObject);
+            // Only projectiles go out of bound top
+            gameObject.SetActive(false);
         }
         if (transform.position.z < lowerBound)
         {

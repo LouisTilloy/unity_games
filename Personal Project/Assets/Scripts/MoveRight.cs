@@ -5,6 +5,7 @@ using UnityEngine;
 public class MoveRight : MonoBehaviour
 {
     public float horizontalSpeed;
+    public bool rotate;
     private Rigidbody objectRigidBody;
 
     // Start is called before the first frame update
@@ -17,6 +18,10 @@ public class MoveRight : MonoBehaviour
     void Update()
     {
         objectRigidBody.velocity = new Vector3(horizontalSpeed, objectRigidBody.velocity.y, objectRigidBody.velocity.z);
+        if (rotate)
+        {
+            objectRigidBody.angularVelocity = new Vector3(0, 0, -horizontalSpeed);
+        }
     }
 
 }

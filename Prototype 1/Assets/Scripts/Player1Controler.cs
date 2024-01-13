@@ -5,16 +5,16 @@ using UnityEngine;
 public class Player1Controler : MonoBehaviour
 {
     // Public variables
-    public GameObject mainCamera;
-    public GameObject driverCamera;
+    [SerializeField] GameObject mainCamera;
+    [SerializeField] GameObject driverCamera;
 
     // Private variables
-    private float speed = 12.0f;
-    private float turnSpeed = 30.0f;
+    private const float speed = 12.0f;
+    private const float turnSpeed = 30.0f;
+    private const float cameraSwitchCooldown = 0.5f;
     private float horizontalInput;
     private float verticalInput;
     private float cameraSwitchInput;
-    private float cameraSwitchCooldown = 0.5f;
     private float lastCameraUpdate = 0.0f;
 
     // Start is called before the first frame update

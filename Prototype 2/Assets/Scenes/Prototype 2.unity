@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119665928}
   - component: {fileID: 119665927}
+  - component: {fileID: 119665929}
   m_Layer: 0
   m_Name: SpawnManager
   m_TagString: Untagged
@@ -178,8 +179,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &119665929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119665926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c0e1f24e2ce4a5b9bf1f3a7499cd45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectsToPool:
+  - {fileID: 4482635755024042080, guid: 0a01b736cba96a1468399138e5c6e32b, type: 3}
+  - {fileID: 3903280812183276860, guid: 604dc51af2ebf5248abf0ecf2d23b39e, type: 3}
+  amountToPool: 3c0000001e000000
 --- !u!1 &170076733
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,9 +859,7 @@ MonoBehaviour:
   powerUpShootAngles: 20
   piercingDelay: 0.2
   piercingTimer: 0
-  regularProjectilePrefab: {fileID: 4482635755024042080, guid: 0a01b736cba96a1468399138e5c6e32b, type: 3}
-  piercingProjectilePrefab: {fileID: 3903280812183276860, guid: 604dc51af2ebf5248abf0ecf2d23b39e, type: 3}
-  currentProjectilePrefab: {fileID: 0}
+  currentProjectilePrefabIndex: 0
 --- !u!54 &517085417
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1078,7 +1093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 0e1316a3e46fdb349b6ff648610a1d71, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400046, guid: 0e1316a3e46fdb349b6ff648610a1d71, type: 3}
       propertyPath: m_LocalPosition.x

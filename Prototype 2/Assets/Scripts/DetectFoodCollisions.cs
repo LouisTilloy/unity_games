@@ -15,12 +15,6 @@ public class DetectFoodCollisions : MonoBehaviour
         hungerManager = gameObject.GetComponent<HungerManager>();
         hungerManager.player = player;
     }
-
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        
-    }
     
     private bool IsIndestructibleProjectile(GameObject gameObject)
     {
