@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1Controler : MonoBehaviour
+public class CameraSwitch : MonoBehaviour
 {
-    // Public variables
+    [SerializeField] int playerNumber;
     [SerializeField] GameObject mainCamera;
     [SerializeField] GameObject driverCamera;
-
-    // Private variables
-    private const float speed = 12.0f;
-    private const float turnSpeed = 30.0f;
     private const float cameraSwitchCooldown = 0.5f;
-    private float horizontalInput;
-    private float verticalInput;
     private float cameraSwitchInput;
     private float lastCameraUpdate = 0.0f;
 
@@ -29,12 +23,8 @@ public class Player1Controler : MonoBehaviour
     {
         // Update last camera update time
         lastCameraUpdate += Time.deltaTime;
-
         // Get player input
-        horizontalInput = Input.GetAxis("Horizontal1");
-        verticalInput = Input.GetAxis("Vertical1");
-        cameraSwitchInput = Input.GetAxis("CameraSwitch1");
-
+        cameraSwitchInput = Input.GetAxis("CameraSwitch" + playerNumber.ToString());
         // If jump button is pressed, switching camera views and preventing pushing the button again for 1 second
         if (cameraSwitchInput == 1 & lastCameraUpdate >= cameraSwitchCooldown)
         {
@@ -46,20 +36,5 @@ public class Player1Controler : MonoBehaviour
             mainCamera.SetActive(!mainCameraActive);
             driverCamera.SetActive(mainCameraActive);
         }
-
-
-        // Things to try
-        // 1) If we wanted to make the acceleration more realistic
-        // the line below except there would be a max front speed and a max back speed
-        // float actualSpeed = speed + verticalInput * 0.5f - speed * speed * 0.01f;
-        // 2) The camera should follow the rotation, maybe with some latency
-        // 3) Should check the vehicle is on the ground to go right/left
-
-
-        // Move the vehicle forward
-        transform.Translate(Vector3.forward * Time.deltaTime * speed * verticalInput);
-        // Turn the vehicle
-        transform.Rotate(Vector3.up, Time.deltaTime * turnSpeed * horizontalInput);
-
     }
 }

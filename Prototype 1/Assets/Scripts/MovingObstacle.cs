@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingObstacle : MonoBehaviour
 {
     private float speed = 20.0f;
-    private float playerStartMovingPosition = 5.0f;
+    [SerializeField] private float playerStartMovingPosition = 5.0f;
     public GameObject player1;
     public GameObject player2;
     // Start is called before the first frame update
