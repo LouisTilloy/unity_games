@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 1034259182743658234}
   - component: {fileID: 1127730205123943715}
   - component: {fileID: 612295812}
+  - component: {fileID: 5235190819647007031}
   m_Layer: 3
   m_Name: Rock_Big
   m_TagString: Rock_Big
@@ -175,3 +176,15 @@ MonoBehaviour:
   - {fileID: 7084834733365910119, guid: f1ff437423b1ec3429d141a2e8c895f4, type: 3}
   - {fileID: 3734435166818868669}
   - {fileID: 6308930757579900746, guid: 8105ad18a1329cc4d9ac091c33eecea8, type: 3}
+--- !u!114 &5235190819647007031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3734435166818868669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80f1d96edb1b824bb1efc25c989926b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

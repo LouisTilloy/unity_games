@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 7681706807762319009}
   - component: {fileID: 2025205483}
   - component: {fileID: 2025205484}
+  - component: {fileID: 8470562317381626598}
   m_Layer: 3
   m_Name: Rock_Giant
   m_TagString: Rock_Giant
@@ -175,3 +176,15 @@ MonoBehaviour:
   - {fileID: 7084834733365910119, guid: f1ff437423b1ec3429d141a2e8c895f4, type: 3}
   - {fileID: 3734435166818868669, guid: c1272fc3038e50244a315b8710be1fbe, type: 3}
   - {fileID: 6308930757579900746}
+--- !u!114 &8470562317381626598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6308930757579900746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80f1d96edb1b824bb1efc25c989926b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
