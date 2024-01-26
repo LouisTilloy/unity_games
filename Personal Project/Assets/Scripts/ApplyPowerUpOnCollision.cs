@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ApplyPowerUpOnCollision : MonoBehaviour
 {
-    [HideInInspector] public PowerupManager powerupManager;
+    public PowerupManager powerupManager;
     [HideInInspector] int powerupIndex;
 
     public void SetIndex(int index)

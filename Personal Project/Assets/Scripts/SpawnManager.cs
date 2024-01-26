@@ -5,14 +5,18 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     // Rocks
-    [SerializeField] private GameObject[] rocks;
-    [SerializeField] private float xSpawnPos;
-    [SerializeField] private float initialUpBoost;
-    
+    [SerializeField] float rockSpawnInitialDelay;
+    [SerializeField] float rockSpawnRate;
+    [SerializeField] GameObject[] rocks;
+    [SerializeField] float xSpawnPos;
+    [SerializeField] float initialUpBoost;
+
     // Powerups
-    [SerializeField] private GameObject[] powerups;
-    [SerializeField] private PowerupManager powerupManager;
-    private float powerupYSpawnPos = 7.5f;
+    [SerializeField] float powerupSpawnInitialDelay;
+    [SerializeField] float powerupSpawnRate;
+    [SerializeField] GameObject[] powerups;
+    [SerializeField] PowerupManager powerupManager;
+    float powerupYSpawnPos = 7.5f;
 
     // Total number of available powerups throughout the game
     public int PowerupCounts()
@@ -22,8 +26,8 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        InvokeRepeating("SpawnRandomRockAtRandomPos", 1.0f, 5.0f);
-        InvokeRepeating("SpawnRandomPowerupAtRandomPos", 5.5f, 12.78412f);
+        InvokeRepeating("SpawnRandomRockAtRandomPos", rockSpawnInitialDelay, rockSpawnRate);
+        InvokeRepeating("SpawnRandomPowerupAtRandomPos", powerupSpawnInitialDelay, powerupSpawnRate);
     }
 
     private GameObject RandomRock()

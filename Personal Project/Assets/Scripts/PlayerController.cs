@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     int MaxProjectileCount()
     {
-        return powerupManager.powerupLevels[0];
+        return powerupManager.powerupLevels[0] + 1;
     }
 
     void Update()

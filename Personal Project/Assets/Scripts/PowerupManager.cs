@@ -10,6 +10,5 @@ public class PowerupManager : MonoBehaviour
     void Start()
     {
         powerupLevels = new int[spawnManager.PowerupCounts()];
-        powerupLevels[0] = 1;  // First powerup - number of projectiles - starts at level 1
     }
 }
