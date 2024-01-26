@@ -7,9 +7,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ReloadMainScene : MonoBehaviour
+public class LoadScene : MonoBehaviour
 {
     Button button;
+    [SerializeField] string sceneName;
     private void Start()
     {
         button = GetComponent<Button>();
@@ -18,6 +19,6 @@ public class ReloadMainScene : MonoBehaviour
     
     private void ReloadScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(sceneName);
     }
 }

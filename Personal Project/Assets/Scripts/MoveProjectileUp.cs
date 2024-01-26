@@ -8,14 +8,12 @@ public class MoveProjectileUp : MonoBehaviour
     private GameObject projectileBody;
     private GameObject projectileHead;
     private Vector3 headOffset;
-    [SerializeField]
-    private float frameHeightIncrease;
-    [SerializeField]
-    private float maximumHeight;
+    [SerializeField] private float frameHeightIncrease;
+    [SerializeField] private float maximumHeight;
 
     private void Start()
     {
-        headOffset = new Vector3(0.0f, -0.37f, -0.02f);
+        headOffset = new Vector3(0.0f, 0.9f, -0.02f);
         projectileBody = transform.Find("Projectile_Body").gameObject;
         projectileHead = transform.Find("Projectile_Head").gameObject;
     }

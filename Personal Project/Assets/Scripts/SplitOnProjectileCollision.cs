@@ -11,7 +11,8 @@ public class SplitOnProjectileCollision : MonoBehaviour
     private GameObject[] ballPrefabs;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Projectile"))
+        // Destroy rock if the collider is a projectile that has not touch another rock yet.
+        if (other.CompareTag("Projectile") && other.GetComponent<ReportTriggers>().GetCurrentTriggerCount() <= 1)
         {
             ReplaceCurrentWithNewPrefabs();
             Destroy(other.gameObject);

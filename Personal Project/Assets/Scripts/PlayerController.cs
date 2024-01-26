@@ -7,16 +7,21 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    [SerializeField]
-    private GameObject projectilePrefab;
-    private List<GameObject> launchedProjectiles;
+    [SerializeField] GameObject projectilePrefab;
+    List<GameObject> launchedProjectiles;
+    PowerupManager powerupManager;
 
     private void Start()
     {
         launchedProjectiles = new List<GameObject>();
+        powerupManager = GetComponent<PowerupManager>();
     }
 
-    // Update is called once per frame
+    int MaxProjectileCount()
+    {
+        return powerupManager.powerupLevels[0];
+    }
+
     void Update()
     {
         // Left and right movement
@@ -27,18 +32,10 @@ public class PlayerController : MonoBehaviour
         launchedProjectiles.RemoveAll(prefab => prefab == null);
 
         // Shoot projectile
-        if (Input.GetButtonDown("Fire") && launchedProjectiles.Count == 0)
+        if (Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
         {
             Vector3 spawnPosition = new Vector3(transform.position.x, projectilePrefab.transform.position.y, transform.position.z);
             launchedProjectiles.Add(Instantiate(projectilePrefab, spawnPosition, transform.rotation));
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Contains("Rock"))
-        {
-            Debug.Log("You're dead.");
         }
     }
 }

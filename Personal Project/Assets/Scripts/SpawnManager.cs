@@ -1,4 +1,3 @@
-using Newtonsoft.Json.Bson;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,28 +5,25 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     // Rocks
-    [SerializeField]
-    private GameObject[] rocks;
-    [SerializeField]
-    private float xSpawnPos;
-    [SerializeField]
-    private float initialUpBoost;
+    [SerializeField] private GameObject[] rocks;
+    [SerializeField] private float xSpawnPos;
+    [SerializeField] private float initialUpBoost;
     
     // Powerups
-    [SerializeField]
-    private GameObject[] powerups;
+    [SerializeField] private GameObject[] powerups;
+    [SerializeField] private PowerupManager powerupManager;
     private float powerupYSpawnPos = 7.5f;
-    // Start is called before the first frame update
+
+    // Total number of available powerups throughout the game
+    public int PowerupCounts()
+    {
+        return powerups.Length;
+    }
+
     void Start()
     {
         InvokeRepeating("SpawnRandomRockAtRandomPos", 1.0f, 5.0f);
         InvokeRepeating("SpawnRandomPowerupAtRandomPos", 5.5f, 12.78412f);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private GameObject RandomRock()
@@ -36,18 +32,11 @@ public class SpawnManager : MonoBehaviour
         return rocks[randomIndex];
     }
 
-    private GameObject RandomPowerup()
-    {
-        int randomIndex = Random.Range(0, powerups.Length);
-        return powerups[randomIndex];
-    }
-
     private float RockSpawnYPosition(GameObject rock)
     {
         float bounceStrength = rock.GetComponent<BounceOnGround>().bounceStrength;
         return bounceStrength - 4.0f;  // found empirically to correspond with the max height
     }
-
 
     void SpawnRandomRockAtRandomPos()
     {
@@ -63,9 +52,15 @@ public class SpawnManager : MonoBehaviour
     void SpawnRandomPowerupAtRandomPos()
     {
         int randomDirection = Random.Range(0, 2) * 2 - 1;  // -1 or 1
-        GameObject powerupPrefab = RandomPowerup();
+        int randomIndex = Random.Range(0, powerups.Length);
+        GameObject powerupPrefab = powerups[randomIndex];
         Vector3 spawnPosition = new Vector3(xSpawnPos * randomDirection, powerupYSpawnPos, powerupPrefab.transform.position.z);
-        GameObject rock = Instantiate(powerupPrefab, spawnPosition, Quaternion.identity);
-        rock.GetComponent<MoveRight>().horizontalSpeed *= -1 * randomDirection;
+        GameObject powerup = Instantiate(powerupPrefab, spawnPosition, Quaternion.identity);
+        powerup.GetComponent<MoveRight>().horizontalSpeed *= -1 * randomDirection;
+
+        ApplyPowerUpOnCollision powerupScript = powerup.GetComponent<ApplyPowerUpOnCollision>();
+        powerupScript.powerupManager = powerupManager;
+        powerupScript.SetIndex(randomIndex);
+
     }
 }
