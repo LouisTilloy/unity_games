@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    [SerializeField] GameObject projectilePrefab;
+    public GameObject projectilePrefab;
     List<GameObject> launchedProjectiles;
     PowerupManager powerupManager;
 
@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
         {
             Vector3 spawnPosition = new Vector3(transform.position.x, projectilePrefab.transform.position.y, transform.position.z);
-            launchedProjectiles.Add(Instantiate(projectilePrefab, spawnPosition, transform.rotation));
+            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
+            launchedProjectiles.Add(projectile);
         }
     }
 }

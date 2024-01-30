@@ -14,10 +14,10 @@ public class LoadScene : MonoBehaviour
     private void Start()
     {
         button = GetComponent<Button>();
-        button.onClick.AddListener(ReloadScene);
+        button.onClick.AddListener(LoadSceneWithName);
     }
     
-    private void ReloadScene()
+    private void LoadSceneWithName()
     {
         SceneManager.LoadScene(sceneName);
     }

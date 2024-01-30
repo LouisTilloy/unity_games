@@ -6,7 +6,7 @@ using UnityEngine;
 public class ApplyPowerUpOnCollision : MonoBehaviour
 {
     public PowerupManager powerupManager;
-    [HideInInspector] int powerupIndex;
+    [SerializeField] int powerupIndex;
 
     public void SetIndex(int index)
     {
@@ -15,6 +15,7 @@ public class ApplyPowerUpOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.gameObject.tag);
         if (other.CompareTag("Projectile"))
         {
             powerupManager.powerupLevels[powerupIndex] += 1;

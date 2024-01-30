@@ -116,7 +116,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 240204daa8aaebf4cb56e3cb203446bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xDestroy: 12
+  xBounds:
+  - -12
+  - 12
+  yBounds:
+  - -1000
+  - 1000
 --- !u!114 &-1455573213558725024
 MonoBehaviour:
   m_ObjectHideFlags: 0

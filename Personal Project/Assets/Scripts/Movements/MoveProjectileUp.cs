@@ -13,12 +13,11 @@ public class MoveProjectileUp : MonoBehaviour
 
     private void Start()
     {
-        headOffset = new Vector3(0.0f, 0.9f, -0.02f);
+        headOffset = new Vector3(0.0f, -0.31f, -0.02f);
         projectileBody = transform.Find("Projectile_Body").gameObject;
         projectileHead = transform.Find("Projectile_Head").gameObject;
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Increase size of projectile by the same amount each frame
@@ -28,11 +27,6 @@ public class MoveProjectileUp : MonoBehaviour
         // - Note: It so happens that increasing the scale by 1 increases the overall height by 2,
         // - meaning that one can just translate by the same number to keep the bottom at the same spot
         projectileBody.transform.position += frameHeightIncrease * Time.deltaTime * Vector3.up;
-
-        if (projectileBody.transform.position.y * 2 > maximumHeight)
-        {
-            Destroy(gameObject);
-        }
 
         // Place head at the top of the body
         projectileHead.transform.position = ProjectileHeadPos(projectileBody.transform.position);

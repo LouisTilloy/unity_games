@@ -1491,7 +1491,8 @@ MonoBehaviour:
   powerupSpawnRate: 17.77
   powerups:
   - {fileID: 7833408395822218104, guid: 2493661f7945ff540a0c190ae6c70fe3, type: 3}
-  powerupManager: {fileID: 956803842}
+  - {fileID: 1812363245015139412, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+  powerupManager: {fileID: 956803850}
 --- !u!4 &708844378
 Transform:
   m_ObjectHideFlags: 0
@@ -1612,6 +1613,71 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &832464965
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -1455573213558725024, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: powerupIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1455573213558725024, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: powerupManager
+      value: 
+      objectReference: {fileID: 956803850}
+    - target: {fileID: 1812363245015139412, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_Name
+      value: PotionPowerup
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.0709944
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5034
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
 --- !u!1 &911115694
 GameObject:
   m_ObjectHideFlags: 0
@@ -1724,8 +1790,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1703e376cf5f35a4eaa0ff4f54b04014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 1058087177}
-  gameOverScoreText: {fileID: 1630798681}
 --- !u!1 &956803827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8421511297574556075, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
@@ -1762,7 +1826,19 @@ MonoBehaviour:
   flickeringPeriod: 0.2
   percentTimeNotRenderered: 0.3
   playerSkin: {fileID: 4521064}
---- !u!114 &956803842
+--- !u!114 &956803849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956803827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66f33a81c07b3834e876eb00ddb4428b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &956803850
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2297,6 +2373,8 @@ GameObject:
   - component: {fileID: 1058087176}
   - component: {fileID: 1058087178}
   - component: {fileID: 1058087177}
+  - component: {fileID: 1058087179}
+  - component: {fileID: 1058087180}
   m_Layer: 5
   m_Name: ScoreText
   m_TagString: Untagged
@@ -2420,6 +2498,31 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1058087175}
   m_CullTransparentMesh: 1
+--- !u!114 &1058087179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058087175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8621d547d1cc94382720d686817b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 911357310}
+--- !u!114 &1058087180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1058087175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d80f1d96edb1b824bb1efc25c989926b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1131909795
 GameObject:
   m_ObjectHideFlags: 0
@@ -3232,6 +3335,7 @@ GameObject:
   - component: {fileID: 1630798680}
   - component: {fileID: 1630798682}
   - component: {fileID: 1630798681}
+  - component: {fileID: 1630798683}
   m_Layer: 5
   m_Name: GameOverScoreText
   m_TagString: Untagged
@@ -3355,6 +3459,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1630798679}
   m_CullTransparentMesh: 1
+--- !u!114 &1630798683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630798679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8621d547d1cc94382720d686817b58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreManager: {fileID: 911357310}
 --- !u!1 &1681783322
 GameObject:
   m_ObjectHideFlags: 0
@@ -3489,6 +3606,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1681783322}
   m_CullTransparentMesh: 1
+--- !u!1001 &1868538525
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -1455573213558725024, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: powerupIndex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1455573213558725024, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: powerupManager
+      value: 
+      objectReference: {fileID: 956803850}
+    - target: {fileID: 1812363245015139412, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_Name
+      value: PotionPowerup (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.0709944
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.5034
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981760284805886510, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ef07ef623098e9342b86f329f1ef5b2f, type: 3}
 --- !u!1 &1913353386
 GameObject:
   m_ObjectHideFlags: 0
@@ -3964,7 +4146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76fe87caf4e5f5549aa4a6ba65047ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerupManager: {fileID: 956803842}
+  powerupManager: {fileID: 956803850}
   powerupSprites:
   - {fileID: 470771431, guid: 3ce379f1f86cdf848841265970f7542b, type: 3}
   - {fileID: 470771431, guid: 3ce379f1f86cdf848841265970f7542b, type: 3}
@@ -4131,7 +4313,10 @@ PrefabInstance:
       addedObject: {fileID: 956803841}
     - targetCorrespondingSourceObject: {fileID: 8421511297574556075, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 956803842}
+      addedObject: {fileID: 956803849}
+    - targetCorrespondingSourceObject: {fileID: 8421511297574556075, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 956803850}
   m_SourcePrefab: {fileID: 100100000, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -4148,3 +4333,5 @@ SceneRoots:
   - {fileID: 911115697}
   - {fileID: 911357309}
   - {fileID: 708844378}
+  - {fileID: 832464965}
+  - {fileID: 1868538525}
