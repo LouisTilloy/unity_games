@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class KeepInBounds : MonoBehaviour
 {
-    private float horizontalBound = 8.75f;
+    float horizontalBound = 8.50f;
 
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.x > horizontalBound)

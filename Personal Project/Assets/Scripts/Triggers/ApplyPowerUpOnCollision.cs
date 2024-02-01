@@ -7,6 +7,7 @@ public class ApplyPowerUpOnCollision : MonoBehaviour
 {
     public PowerupManager powerupManager;
     [SerializeField] int powerupIndex;
+    bool powerupApplied = false;
 
     public void SetIndex(int index)
     {
@@ -16,9 +17,11 @@ public class ApplyPowerUpOnCollision : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.CompareTag("Projectile"))
+        if (!powerupApplied && other.CompareTag("Projectile"))
         {
-            powerupManager.powerupLevels[powerupIndex] += 1;
+            powerupManager.powerupLevels[powerupIndex] += powerupManager.IsLevelMax(powerupIndex) ? 0 : 1;
+            powerupApplied = true;
+            EventsHandler.InvokeOnPowerupPickup();
             Destroy(gameObject);
         }
     }

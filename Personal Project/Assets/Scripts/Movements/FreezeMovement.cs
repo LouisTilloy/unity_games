@@ -7,6 +7,7 @@ public class FreezeMovement : MonoBehaviour
     Transform projectileHeadTransform;
     float freezeHeight;
     MoveProjectileUp moveUpScript;
+    bool freezeHappened = false;
 
     void Start()
     {
@@ -17,10 +18,11 @@ public class FreezeMovement : MonoBehaviour
 
     void Update()
     {
-        if (projectileHeadTransform.position.y > freezeHeight)
+        if (!freezeHappened && projectileHeadTransform.position.y > freezeHeight)
         {
-            Debug.Log("moveUpScript.enabled = false;");
             moveUpScript.enabled = false;
+            EventsHandler.InvokeOnProjectileFreeze();
+            freezeHappened = true;
         }
     }
 }

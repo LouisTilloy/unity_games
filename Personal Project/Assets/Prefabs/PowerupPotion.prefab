@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 3492144888093446173}
   - component: {fileID: 7432909366464372409}
   m_Layer: 0
-  m_Name: PotionPowerup
+  m_Name: PowerupPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d22fc6b9a431b043a917fb89a80bcfc, type: 2}
+  - {fileID: 2100000, guid: e8f7cd6bf22dcad47b420d7a582dc45c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupManager: {fileID: 0}
+  powerupIndex: 0
 --- !u!114 &6538787251818532171
 MonoBehaviour:
   m_ObjectHideFlags: 0

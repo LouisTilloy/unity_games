@@ -6,8 +6,13 @@ public class NumberOfTriggers : MonoBehaviour
 {
     public int numberOfTriggers;
 
-    void Start()
+    void Update()
     {
-        numberOfTriggers = 0;
+        /*
+        if (numberOfTriggers > 0)
+        {
+            Destroy(gameObject);
+        }
+        */
     }
 }

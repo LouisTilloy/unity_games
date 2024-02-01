@@ -1,10 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
 public class SharedUtils
 {
+    // Get maximum value of a dictionnary with a default value if dictionnary is empty.
+    public static int MaxDictDefault(Dictionary<int, int> dict, int defaultValue)
+    {
+        if (dict.Count == 0) 
+        {
+            return defaultValue; 
+        }
+        else 
+        {
+            return dict.Values.Max(); 
+        }
+    }
 
     public static IEnumerator WaitThenPauseGameForSeconds(float waitTime, float pauseTime)
     {

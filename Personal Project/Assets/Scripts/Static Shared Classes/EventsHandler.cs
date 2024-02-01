@@ -8,6 +8,8 @@ public class EventsHandler : MonoBehaviour
     public static event GeneralEventHandler OnGameOver;
     public static event GeneralEventHandler LateOnGameOver;
     public static event GeneralEventHandler OnLifeLost;
+    public static event GeneralEventHandler OnProjectileFreeze;
+    public static event GeneralEventHandler OnPowerupPickup;
 
     public static void InvokeOnGameOver()
     {
@@ -22,5 +24,15 @@ public class EventsHandler : MonoBehaviour
     public static void InvokeOnLifeLost()
     {
         OnLifeLost?.Invoke();
+    }
+
+    public static void InvokeOnProjectileFreeze()
+    {
+        OnProjectileFreeze?.Invoke();
+    }
+
+    public static void InvokeOnPowerupPickup()
+    {
+        OnPowerupPickup?.Invoke();
     }
 }

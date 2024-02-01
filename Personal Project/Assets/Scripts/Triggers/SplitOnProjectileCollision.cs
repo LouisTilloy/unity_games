@@ -7,15 +7,23 @@ using UnityEngine;
 
 public class SplitOnProjectileCollision : MonoBehaviour
 {
+    bool triggered = false;
     [SerializeField]
     private GameObject[] ballPrefabs;
+    
     private void OnTriggerEnter(Collider other)
     {
-        // Destroy rock if the collider is a projectile that has not touch another rock yet.
-        if (other.CompareTag("Projectile") && other.GetComponent<ReportTriggers>().GetCurrentTriggerCount() <= 1)
+        // Only interact with projectiles
+        if (!other.CompareTag("Projectile")) { return; }
+
+        // Destroy rock if the collider is a projectile that has not touched another rock yet.
+        int projectileTriggerCount = other.GetComponentInParent<NumberOfTriggers>().numberOfTriggers;
+        if (!triggered && projectileTriggerCount == 0)
         {
+            other.GetComponentInParent<NumberOfTriggers>().numberOfTriggers = 1;
             ReplaceCurrentWithNewPrefabs();
             Destroy(other.gameObject);
+            triggered = true;
         }
     }
 
@@ -48,4 +56,5 @@ public class SplitOnProjectileCollision : MonoBehaviour
         }
         Destroy(gameObject);
     }
+
 }

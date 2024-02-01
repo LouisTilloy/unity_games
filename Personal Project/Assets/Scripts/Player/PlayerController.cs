@@ -32,11 +32,12 @@ public class PlayerController : MonoBehaviour
         launchedProjectiles.RemoveAll(prefab => prefab == null);
 
         // Shoot projectile
+        GameObject lastProjectile;
         if (Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
         {
             Vector3 spawnPosition = new Vector3(transform.position.x, projectilePrefab.transform.position.y, transform.position.z);
-            GameObject projectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
-            launchedProjectiles.Add(projectile);
+            lastProjectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
+            launchedProjectiles.Add(lastProjectile);
         }
     }
 }

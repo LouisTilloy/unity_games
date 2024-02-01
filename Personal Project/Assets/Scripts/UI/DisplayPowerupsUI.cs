@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,6 +13,9 @@ public class DisplayPowerupsUI : MonoBehaviour
     List<GameObject> powerupSlots;
     List<Image> powerupSlotImages;
     List<TextMeshProUGUI> powerupTexts;
+
+    Dictionary<int, int> powerupIndexToSlotIndex;
+    float maxFontSize = 60.0f;
 
     void Start()
     {
@@ -26,26 +30,56 @@ public class DisplayPowerupsUI : MonoBehaviour
             powerupSlotImages.Add(currentPowerupSlot.GetComponent<Image>());
             powerupTexts.Add(currentPowerupSlot.GetComponentInChildren<TextMeshProUGUI>());
         }
+        powerupIndexToSlotIndex = new Dictionary<int, int>();
+
+        EventsHandler.OnPowerupPickup += UpdateUI;
     }
 
-    void Update()
+    void UpdateUI()
     {
         int currentPowerupLevel;
+        int powerupSlotIndex;
         for (int powerupIndex = 0; powerupIndex < powerupManager.powerupLevels.Length; powerupIndex++)
         {
             currentPowerupLevel = powerupManager.powerupLevels[powerupIndex];
-            // If powerup is active, display its sprite and its level in the UI
-            if (currentPowerupLevel >= 1)
-            {
-                powerupSlots[powerupIndex].SetActive(true);
-                powerupSlotImages[powerupIndex].sprite = powerupSprites[powerupIndex];
-                powerupTexts[powerupIndex].text = currentPowerupLevel.ToString();
+            
+            // Skip innactive powerups
+            if (currentPowerupLevel == 0) 
+            { 
+                continue; 
             }
-            // if powerup is not active, make sure it is deactivated
+
+            // If powerup is already active, we retrieve its slot
+            if (powerupIndexToSlotIndex.ContainsKey(powerupIndex))
+            {
+                powerupSlotIndex = powerupIndexToSlotIndex[powerupIndex];
+            }
+            // If it is a new powerup, we assign it to a slot and display the corresponding sprite
             else
             {
-                powerupSlots[powerupIndex].SetActive(false);
+                powerupSlotIndex = SharedUtils.MaxDictDefault(powerupIndexToSlotIndex, -1) + 1;
+                powerupIndexToSlotIndex[powerupIndex] = powerupSlotIndex;
+                powerupSlots[powerupSlotIndex].SetActive(true);
+                powerupSlotImages[powerupSlotIndex].sprite = powerupSprites[powerupIndex];
+            }
+            
+            // We finally update the level of the powerup in the UI
+            if (powerupManager.IsLevelMax(powerupIndex)) 
+            {
+                powerupTexts[powerupSlotIndex].fontSize = maxFontSize;
+                powerupTexts[powerupSlotIndex].text = "max";
+            }
+            else
+            {
+                powerupTexts[powerupSlotIndex].text = currentPowerupLevel.ToString();
             }
         }
     }
+
+    void OnDestroy()
+    {
+        EventsHandler.OnPowerupPickup -= UpdateUI;
+    }
+
+
 }
