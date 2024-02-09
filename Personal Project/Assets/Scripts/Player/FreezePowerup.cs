@@ -5,22 +5,33 @@ using UnityEngine;
 public class FreezePowerup : MonoBehaviour
 {
     PowerupManager powerupManager;
-    FreezeMovement freezeMovementScript;
-    bool wasFreezeActivated = false;
+    float freezeActivatedTimer = 0;
+    float timeToActivateScripts = 1.0f;
 
     void Start()
     {
         powerupManager = GetComponent<PowerupManager>();
-        freezeMovementScript = GetComponent<PlayerController>().projectilePrefab.GetComponent<FreezeMovement>();
-        freezeMovementScript.enabled = false;
+        foreach (GameObject projectile in ObjectPooling.SharedInstance.projectiles)
+        {
+            FreezeMovement freezeMovementScript = projectile.GetComponent<FreezeMovement>();
+            freezeMovementScript.enabled = false;
+        }
     }
 
     void Update()
     {
-        if (!wasFreezeActivated && powerupManager.powerupLevels[1] >= 1)
+        // Only updating deactivated scripts, leaving some time to do so
+        if (freezeActivatedTimer < timeToActivateScripts && powerupManager.powerupLevels[1] >= 1)
         {
-            freezeMovementScript.enabled = true;
-            wasFreezeActivated = true;
+            foreach (GameObject projectile in ObjectPooling.SharedInstance.projectiles)
+            {
+                if (!projectile.activeInHierarchy)
+                {
+                    FreezeMovement freezeMovementScript = projectile.GetComponent<FreezeMovement>();
+                    freezeMovementScript.enabled = true;
+                }
+            }
+            freezeActivatedTimer += Time.deltaTime;
         }
     }
 }

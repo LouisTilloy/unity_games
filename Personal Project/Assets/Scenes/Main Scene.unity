@@ -1142,7 +1142,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 470771431, guid: 3ce379f1f86cdf848841265970f7542b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d45e1ffef08bc7a43a1babc71c3d1b25, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1342,6 +1342,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 660368160}
   m_CullTransparentMesh: 1
+--- !u!1 &682870129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 682870131}
+  - component: {fileID: 682870130}
+  m_Layer: 0
+  m_Name: ObjectPoolingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &682870130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682870129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a5d37574d46ebf4584949ea8ba48851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 9075959704117675155, guid: 1374b6a3ac4f29a489a25ae4ce6c6002, type: 3}
+  projectiles: []
+--- !u!4 &682870131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682870129}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,6 +4211,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1753155762072491689, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
+      propertyPath: spawnYPos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753155762072491689, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 9075959704117675155, guid: 1374b6a3ac4f29a489a25ae4ce6c6002, type: 3}
@@ -4315,3 +4365,4 @@ SceneRoots:
   - {fileID: 911115697}
   - {fileID: 911357309}
   - {fileID: 708844378}
+  - {fileID: 682870131}

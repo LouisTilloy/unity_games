@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    public GameObject projectilePrefab;
     List<GameObject> launchedProjectiles;
     PowerupManager powerupManager;
 
@@ -28,15 +27,17 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * speed * Time.deltaTime * horizontalInput);
 
-        // Clean list of any null projectile
-        launchedProjectiles.RemoveAll(prefab => prefab == null);
+        // Clean list of any deactivated projectile
+        launchedProjectiles.RemoveAll(projectile => !projectile.activeInHierarchy);
 
         // Shoot projectile
         GameObject lastProjectile;
         if (Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
         {
-            Vector3 spawnPosition = new Vector3(transform.position.x, projectilePrefab.transform.position.y, transform.position.z);
-            lastProjectile = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
+            lastProjectile = ObjectPooling.SharedInstance.GetPooledProjectile();
+            lastProjectile.transform.position = transform.position;
+            lastProjectile.transform.rotation = transform.rotation;
+            lastProjectile.SetActive(true);
             launchedProjectiles.Add(lastProjectile);
         }
     }

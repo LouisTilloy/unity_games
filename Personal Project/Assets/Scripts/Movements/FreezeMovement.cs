@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class FreezeMovement : MonoBehaviour
 {
+    public bool freezeHappened = false;
+
     Transform projectileHeadTransform;
     float freezeHeight;
     MoveProjectileUp moveUpScript;
-    bool freezeHappened = false;
 
-    void Start()
+    private void Awake()
     {
         projectileHeadTransform = transform.Find("Projectile_Head");
         moveUpScript = GetComponent<MoveProjectileUp>();
-        freezeHeight = GetComponentInChildren<DestroyOutOfBounds>().yBounds[1] - 1f;
+        freezeHeight = GetComponentInChildren<DeactivateOutOfBounds>().yBoundUp - 1f;
+        enabled = false;
+    }
+
+    void OnEnable()
+    {
+        moveUpScript.enabled = true;
+        freezeHappened = false;
     }
 
     void Update()
@@ -25,4 +33,5 @@ public class FreezeMovement : MonoBehaviour
             freezeHappened = true;
         }
     }
+
 }

@@ -16,7 +16,6 @@ public class ApplyPowerUpOnCollision : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
         if (!powerupApplied && other.CompareTag("Projectile"))
         {
             powerupManager.powerupLevels[powerupIndex] += powerupManager.IsLevelMax(powerupIndex) ? 0 : 1;

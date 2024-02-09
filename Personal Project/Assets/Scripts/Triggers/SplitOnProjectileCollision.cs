@@ -21,8 +21,9 @@ public class SplitOnProjectileCollision : MonoBehaviour
         if (!triggered && projectileTriggerCount == 0)
         {
             other.GetComponentInParent<NumberOfTriggers>().numberOfTriggers = 1;
+            other.transform.parent.gameObject.SetActive(false);
+            
             ReplaceCurrentWithNewPrefabs();
-            Destroy(other.gameObject);
             triggered = true;
         }
     }

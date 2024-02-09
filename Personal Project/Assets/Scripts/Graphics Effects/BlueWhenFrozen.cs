@@ -1,30 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlueWhenFrozen : MonoBehaviour
 {
-    [SerializeField] Material frozenColorMaterial;
-    List<Material> materials;
+    [SerializeField] List<Material> frozenColorMaterials;
+    [SerializeField] List<Material> defaultMaterials;
 
-    void Start()
+    FreezeMovement freezeMovementScript;
+    List<MeshRenderer> renderers;
+    bool switchHappened = false;
+
+    private void OnEnable()
     {
-        materials = new List<Material>();
+        int idx = 0;
         foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
         {
-            materials.Add(renderer.material);
+            renderer.material = defaultMaterials[idx];
+            idx++;
         }
-        EventsHandler.OnProjectileFreeze += SwitchMaterialToFrozen;
+        switchHappened = false;
     }
 
-    void SwitchMaterialToFrozen()
+    void Awake()
     {
-        materials[0].color = frozenColorMaterial.color;
-        materials[1].color = frozenColorMaterial.color;
+        renderers = new List<MeshRenderer>();
+        freezeMovementScript = GetComponent<FreezeMovement>();
+        foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+        {
+            renderers.Add(renderer);
+        }
     }
 
-    void OnDestroy()
+    private void Update()
     {
-        EventsHandler.OnProjectileFreeze -= SwitchMaterialToFrozen;
+        // Only do this once as soon as the projectile is frozen
+        if (!switchHappened && freezeMovementScript.freezeHappened)
+        {
+            renderers[0].material = frozenColorMaterials[0];
+            renderers[1].material = frozenColorMaterials[1];
+            switchHappened = true;
+        }
     }
 }

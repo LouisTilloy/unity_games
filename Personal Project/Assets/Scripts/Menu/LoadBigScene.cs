@@ -44,7 +44,7 @@ public class LoadBigScene : MonoBehaviour
         while (!asyncOperation.isDone)
         {
             //Output the current progress
-            m_Text.text = "Loading progress: " + (asyncOperation.progress * 100) + "%";
+            m_Text.text = "Loading progress: " + (int) (asyncOperation.progress * 100) + "%";
 
             // Check if the load has finished
             if (asyncOperation.progress >= 0.9f)
