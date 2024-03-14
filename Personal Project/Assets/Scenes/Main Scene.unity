@@ -1696,6 +1696,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9d1fb22258e454bac870c08258d4f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelsJsonFile: {fileID: 4900000, guid: 2f25d8afc1d737947ba46e917fa80343, type: 3}
   rockSpawnInitialDelay: 4
   rockSpawnRate: 5
   rocks:

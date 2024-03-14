@@ -26,25 +26,9 @@ public class SplitOnProjectileCollision : MonoBehaviour
         }
     }
 
-    private int GetCurrentPrefabIndex()
-    {
-        switch (gameObject.tag) 
-        {
-            case "Rock_Light":
-                return 0;
-            case "Rock_Medium":
-                return 1;
-            case "Rock_Big":
-                return 2;
-            case "Rock_Giant":
-                return 3;
-        }
-        throw new ArgumentException();
-    }
-
     private void ReplaceCurrentWithNewPrefabs() 
     {
-        int nextIndex = GetCurrentPrefabIndex() - 1;
+        int nextIndex = SharedUtils.RockNameToPrefabIndex(gameObject.tag) - 1;
         if (nextIndex >= 0)
         {
             GameObject ballLeft = Instantiate(ballPrefabs[nextIndex]);

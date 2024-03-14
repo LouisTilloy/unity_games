@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,22 @@ using UnityEngine;
 
 public class SharedUtils
 {
+    public static int RockNameToPrefabIndex(string rockName)
+    {
+        switch (rockName)
+        {
+            case "Rock_Light":
+                return 0;
+            case "Rock_Medium":
+                return 1;
+            case "Rock_Big":
+                return 2;
+            case "Rock_Giant":
+                return 3;
+        }
+        throw new ArgumentException();
+    }
+
     // Resolution of reference: 1920x1080
     public static float refAspectRatio = 1920.0f / 1080.0f;
 
