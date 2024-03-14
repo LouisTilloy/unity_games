@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
             lastProjectile.transform.rotation = transform.rotation;
             lastProjectile.SetActive(true);
             launchedProjectiles.Add(lastProjectile);
+
+            EventsHandler.InvokeOnProjectileShot();
         }
     }
 }

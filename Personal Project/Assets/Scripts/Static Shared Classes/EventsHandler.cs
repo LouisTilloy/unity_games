@@ -9,7 +9,14 @@ public class EventsHandler : MonoBehaviour
     public static event GeneralEventHandler LateOnGameOver;
     public static event GeneralEventHandler OnLifeLost;
     public static event GeneralEventHandler OnProjectileFreeze;
-    public static event GeneralEventHandler OnPowerupPickup;
+    public static event GeneralEventHandler OnShieldCharged;
+    public static event GeneralEventHandler OnShieldBroken;
+    public static event GeneralEventHandler OnRockBroken;
+    public static event GeneralEventHandler OnProjectileShot;
+    public static event GeneralEventHandler OnScreenResolutionChange;
+
+    public delegate void IntEventHandler(int powerupIndex);
+    public static event IntEventHandler OnPowerupGrab;
 
     public static void InvokeOnGameOver()
     {
@@ -31,8 +38,34 @@ public class EventsHandler : MonoBehaviour
         OnProjectileFreeze?.Invoke();
     }
 
-    public static void InvokeOnPowerupPickup()
+
+    public static void InvokeOnShieldCharged()
     {
-        OnPowerupPickup?.Invoke();
+        OnShieldCharged?.Invoke();
+    }
+
+    public static void InvokeOnShieldBroken()
+    {
+        OnShieldBroken?.Invoke();
+    }
+
+    public static void InvokeOnRockBroken()
+    {
+        OnRockBroken?.Invoke();
+    }
+
+    public static void InvokeOnProjectileShot()
+    {
+        OnProjectileShot?.Invoke();
+    }
+
+    public static void InvokeOnPowerupGrab(int powerupIndex)
+    {
+        OnPowerupGrab?.Invoke(powerupIndex);
+    }
+
+    public static void InvokeOnScreenResolutionChange()
+    {
+        OnScreenResolutionChange?.Invoke();
     }
 }

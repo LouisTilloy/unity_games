@@ -1,10 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeepInBounds : MonoBehaviour
 {
-    float horizontalBound = 8.50f;
+    // Reference Resolution: 1920p x 1080p
+    float horizontalBound;
+    float referenceHorizontalBound = 8.50f;
+
+    private void Start()
+    {
+        ScaleBoundWithScreen();
+        EventsHandler.OnScreenResolutionChange += ScaleBoundWithScreen;
+    }
+
+    void ScaleBoundWithScreen()
+    {
+        horizontalBound = referenceHorizontalBound * SharedUtils.AspectRatioScalingFactor();
+    }
 
     void Update()
     {
@@ -17,5 +28,10 @@ public class KeepInBounds : MonoBehaviour
         {
             transform.position = new Vector3(-horizontalBound, transform.position.y, transform.position.z);
         }
+    }
+
+    private void OnDestroy()
+    {
+        EventsHandler.OnScreenResolutionChange -= ScaleBoundWithScreen;
     }
 }

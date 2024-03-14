@@ -32,10 +32,11 @@ public class DisplayPowerupsUI : MonoBehaviour
         }
         powerupIndexToSlotIndex = new Dictionary<int, int>();
 
-        EventsHandler.OnPowerupPickup += UpdateUI;
+        EventsHandler.OnPowerupGrab += UpdateUI;
     }
 
-    void UpdateUI()
+    // We ignore the powerup index and update the entire UI instead, just to me more robust to bugs
+    void UpdateUI(int dummyPowerupIndex)
     {
         int currentPowerupLevel;
         int powerupSlotIndex;
@@ -54,6 +55,7 @@ public class DisplayPowerupsUI : MonoBehaviour
             {
                 powerupSlotIndex = powerupIndexToSlotIndex[powerupIndex];
             }
+
             // If it is a new powerup, we assign it to a slot and display the corresponding sprite
             else
             {
@@ -78,7 +80,7 @@ public class DisplayPowerupsUI : MonoBehaviour
 
     void OnDestroy()
     {
-        EventsHandler.OnPowerupPickup -= UpdateUI;
+        EventsHandler.OnPowerupGrab -= UpdateUI;
     }
 
 

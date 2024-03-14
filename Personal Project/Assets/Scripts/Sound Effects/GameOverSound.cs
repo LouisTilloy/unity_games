@@ -26,7 +26,7 @@ public class GameOverSound : MonoBehaviour
 
     IEnumerator PlayDeathEffects()
     {
-        gameOverSoundEffect.Play();
+        // gameOverSoundEffect.Play();
         yield return new WaitForSecondsRealtime(silenceBeforeJingle);
         gameOverJingle.Play();
     }

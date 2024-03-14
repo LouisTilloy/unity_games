@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class LivesManager : MonoBehaviour
 {
+    public string enemyBaseTag = "Rock";
+
     [SerializeField] private float invicibilityDuration = 3.0f;
 
     [HideInInspector] public int maxLives = 3;
     [HideInInspector] public int lives;
     [HideInInspector] public bool isInvincible = false;
-    private string enemyBaseTag = "Rock";
+    [HideInInspector] public bool isShielded = false;
 
     private void Start()
     {
@@ -18,13 +20,14 @@ public class LivesManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Contains(enemyBaseTag) && !isInvincible)
+        if (other.tag.Contains(enemyBaseTag) && !isInvincible && !isShielded)
         {
             lives -= 1;
+            EventsHandler.InvokeOnLifeLost();
             if (lives > 0)
             {
                 StartCoroutine(SharedUtils.WaitThenPauseGameForSeconds(0.0f, 0.1f));
-                StartCoroutine(temporaryInvincibility());
+                StartCoroutine(TemporaryInvincibility(invicibilityDuration));
             }
             else if (lives == 0)
             {
@@ -33,10 +36,10 @@ public class LivesManager : MonoBehaviour
         }
     }
 
-    IEnumerator temporaryInvincibility()
+    public IEnumerator TemporaryInvincibility(float duration)
     {
         isInvincible = true;
-        yield return new WaitForSeconds(invicibilityDuration);
+        yield return new WaitForSeconds(duration);
         isInvincible = false;
     }
 

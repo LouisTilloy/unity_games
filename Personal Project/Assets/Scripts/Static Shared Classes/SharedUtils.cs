@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class SharedUtils
 {
+    // Resolution of reference: 1920x1080
+    public static float refAspectRatio = 1920.0f / 1080.0f;
+
+    public static float AspectRatioScalingFactor()
+    {
+        float currentAspectRatio = (float)Screen.width / (float)Screen.height;
+        return currentAspectRatio / refAspectRatio;
+    }
+
     // Get maximum value of a dictionnary with a default value if dictionnary is empty.
     public static int MaxDictDefault(Dictionary<int, int> dict, int defaultValue)
     {

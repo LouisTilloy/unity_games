@@ -20,7 +20,7 @@ public class ApplyPowerUpOnCollision : MonoBehaviour
         {
             powerupManager.powerupLevels[powerupIndex] += powerupManager.IsLevelMax(powerupIndex) ? 0 : 1;
             powerupApplied = true;
-            EventsHandler.InvokeOnPowerupPickup();
+            EventsHandler.InvokeOnPowerupGrab(powerupIndex);
             Destroy(gameObject);
         }
     }

@@ -8,7 +8,8 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float rockSpawnInitialDelay;
     [SerializeField] float rockSpawnRate;
     [SerializeField] GameObject[] rocks;
-    [SerializeField] float xSpawnPos;
+    [SerializeField] float xSpawnPos1080p;
+    float xSpawnPos;
     [SerializeField] float initialUpBoost;
 
     // Powerups
@@ -26,8 +27,15 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
+        ScaleSpawnPosWithScreen();
+        EventsHandler.OnScreenResolutionChange += ScaleSpawnPosWithScreen;
         InvokeRepeating("SpawnRandomRockAtRandomPos", rockSpawnInitialDelay, rockSpawnRate);
         InvokeRepeating("SpawnRandomPowerupAtRandomPos", powerupSpawnInitialDelay, powerupSpawnRate);
+    }
+
+    void ScaleSpawnPosWithScreen()
+    {
+        xSpawnPos = xSpawnPos1080p * SharedUtils.AspectRatioScalingFactor();
     }
 
     private GameObject RandomRock()
@@ -66,5 +74,10 @@ public class SpawnManager : MonoBehaviour
         powerupScript.powerupManager = powerupManager;
         powerupScript.SetIndex(randomIndex);
 
+    }
+
+    private void OnDestroy()
+    {
+        EventsHandler.OnScreenResolutionChange -= ScaleSpawnPosWithScreen;
     }
 }

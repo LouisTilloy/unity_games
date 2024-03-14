@@ -1,8 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using UnityEditor.AnimatedValues;
 using UnityEngine;
 
 public class SplitOnProjectileCollision : MonoBehaviour
@@ -25,6 +21,8 @@ public class SplitOnProjectileCollision : MonoBehaviour
             
             ReplaceCurrentWithNewPrefabs();
             triggered = true;
+
+            EventsHandler.InvokeOnRockBroken();
         }
     }
 

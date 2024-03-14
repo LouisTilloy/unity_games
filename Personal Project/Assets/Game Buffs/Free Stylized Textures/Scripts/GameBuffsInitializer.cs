@@ -1,9 +1,10 @@
+/*
 using UnityEditor;
 using UnityEngine;
 
 namespace GameBuffs.FreeStylizedTextures
 {
-    [InitializeOnLoad]
+    // [InitializeOnLoad]
     public static class GameBuffsInitializer
     {
         private const string PACKAGE_VERSION = "1.2.0";
@@ -34,3 +35,4 @@ namespace GameBuffs.FreeStylizedTextures
         }
     }
 }
+*/

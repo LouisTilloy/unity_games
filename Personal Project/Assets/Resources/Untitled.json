@@ -1,0 +1,25 @@
+{
+	"spawns":
+	[
+		{
+			"level": 1,
+			"time": 5,
+			"enemy": "Rock_Light"
+		},
+		{
+			"level": 1,
+			"time": 6,
+			"enemy": "Rock_Medium"
+		},
+		{
+			"level": 1,
+			"time": 7,
+			"enemy": "Rock_Medium"
+		},
+		{
+			"level": 1,
+			"time": 8,
+			"enemy": "Rock_Medium"
+		},
+	]
+}
