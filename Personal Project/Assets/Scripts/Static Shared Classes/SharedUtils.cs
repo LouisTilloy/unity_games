@@ -23,6 +23,22 @@ public class SharedUtils
         throw new ArgumentException();
     }
 
+    public static int PowerupNameToIndex(string powerupName)
+    {
+        switch (powerupName)
+        {
+            case "Extra_Projectile":
+                return 0;
+            case "Freeze":
+                return 1;
+            case "Shield":
+                return 2;
+            case "Random":
+                return UnityEngine.Random.Range(0, 3);
+        }
+        throw new ArgumentException();
+    }
+
     // Resolution of reference: 1920x1080
     public static float refAspectRatio = 1920.0f / 1080.0f;
 

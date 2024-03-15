@@ -5,33 +5,29 @@ using UnityEngine.Pool;
 
 public class ObjectPooling : MonoBehaviour
 {
-    public static ObjectPooling SharedInstance;
-
-    [SerializeField] GameObject projectilePrefab;
-    public List<GameObject> projectiles;
-    int nProjectiles = 10;
+    [SerializeField] GameObject objectPrefab;
+    public List<GameObject> pooledObjects;
+    int nObjects = 10;
 
     void Awake()
     {
-        SharedInstance = this;
-
-        projectiles = new List<GameObject>();
-        for (int projectileIndex = 0; projectileIndex < nProjectiles; projectileIndex++)
+        pooledObjects = new List<GameObject>();
+        for (int projectileIndex = 0; projectileIndex < nObjects; projectileIndex++)
         {
-            GameObject projectile = Instantiate(projectilePrefab);
+            GameObject projectile = Instantiate(objectPrefab);
             projectile.SetActive(false);
             projectile.transform.SetParent(gameObject.transform, false);
-            projectiles.Add(projectile);
+            pooledObjects.Add(projectile);
         }
     }
 
-    public GameObject GetPooledProjectile()
+    public GameObject GetPooledObject()
     {
-        for (int i = 0; i < nProjectiles; i++)
+        for (int i = 0; i < nObjects; i++)
         {
-            if (!projectiles[i].activeInHierarchy)
+            if (!pooledObjects[i].activeInHierarchy)
             {
-                return projectiles[i];
+                return pooledObjects[i];
             }
         }
         return null;

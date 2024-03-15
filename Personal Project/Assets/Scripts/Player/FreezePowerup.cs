@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FreezePowerup : MonoBehaviour
 {
+    [SerializeField] ObjectPooling objectPooling;
     PowerupManager powerupManager;
     float freezeActivatedTimer = 0;
     float timeToActivateScripts = 1.0f;
@@ -11,7 +12,7 @@ public class FreezePowerup : MonoBehaviour
     void Start()
     {
         powerupManager = GetComponent<PowerupManager>();
-        foreach (GameObject projectile in ObjectPooling.SharedInstance.projectiles)
+        foreach (GameObject projectile in objectPooling.pooledObjects)
         {
             FreezeMovement freezeMovementScript = projectile.GetComponent<FreezeMovement>();
             freezeMovementScript.enabled = false;
@@ -23,7 +24,7 @@ public class FreezePowerup : MonoBehaviour
         // Only updating deactivated scripts, leaving some time to do so
         if (freezeActivatedTimer < timeToActivateScripts && powerupManager.powerupLevels[1] >= 1)
         {
-            foreach (GameObject projectile in ObjectPooling.SharedInstance.projectiles)
+            foreach (GameObject projectile in objectPooling.pooledObjects)
             {
                 if (!projectile.activeInHierarchy)
                 {

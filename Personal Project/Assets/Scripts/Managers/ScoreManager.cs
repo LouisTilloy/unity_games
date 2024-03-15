@@ -2,41 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
-    float currentTime;
-    IEnumerator scoreClockCoroutine;
+    int score = 0;
+    [SerializeField] int scoreLight;
+    [SerializeField] int scoreMedium;
+    [SerializeField] int scoreBig;
+    [SerializeField] int scoreGiant;
 
     public float Score()
     {
-        return Mathf.Round(currentTime);
+        return score;
     }
 
     void Start()
     {
-        scoreClockCoroutine = ScoreClock();
-        StartCoroutine(scoreClockCoroutine);
-        EventsHandler.OnGameOver += StopScoreClock;
+        EventsHandler.OnRockBrokenWithInfo += IncreaseScore;
     }
 
-    void StopScoreClock()
+    public int RockScore(string rockTag)
     {
-        StopCoroutine(scoreClockCoroutine);
-    }
-
-    IEnumerator ScoreClock()
-    {
-        currentTime = 0;
-        while (true)
+        int scoreIncrease;
+        switch (rockTag)
         {
-            currentTime += Time.deltaTime;
-            yield return null;
+            case "Rock_Light":
+                scoreIncrease = scoreLight;
+                break;
+            case "Rock_Medium":
+                scoreIncrease = scoreMedium;
+                break;
+            case "Rock_Big":
+                scoreIncrease = scoreBig;
+                break;
+            case "Rock_Giant":
+                scoreIncrease = scoreGiant;
+                break;
+            default:
+                throw new ArgumentException();
         }
+        return scoreIncrease;
+    }
+
+    void IncreaseScore(Vector3 _, string rockTag)
+    {
+        score += RockScore(rockTag);
     }
 
     void OnDestroy()
     {
-        EventsHandler.OnGameOver -= StopScoreClock;
+        EventsHandler.OnRockBrokenWithInfo -= IncreaseScore;
     }
 }

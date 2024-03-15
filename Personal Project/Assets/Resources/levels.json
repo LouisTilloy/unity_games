@@ -1,42 +1,55 @@
 {
-	"levels":
+	"levelsChunks":
 	[
 		{
 			"level": 1,
 			"timeInterval": [6, 6],
-			"enemies": ["Rock_Light"]
+			"enemies": ["Rock_Light"],
+			"powerups": []
+		},
+		{
+			"level": 1,
+			"timeInterval": [10, 15],
+			"enemies": ["Rock_Medium"],
+			"powerups": ["Extra_Projectile"]
+		},
+
+
+		{
+			"level": 2,
+			"timeInterval": [20, 25],
+			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Medium", "Rock_Medium"],
+			"powerups": []
 		},
 		{
 			"level": 2,
-			"timeInterval": [10, 15],
-			"enemies": ["Rock_Medium"]
+			"timeInterval": [30, 40],
+			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Big"],
+			"powerups": ["Random"]
+		},
+
+
+		{
+			"level": 3,
+			"timeInterval": [45, 60],
+			"enemies": ["Rock_Medium", "Rock_Medium", "Rock_Giant", "Rock_Giant"],
+			"powerups": ["Shield"]
 		},
 		{
 			"level": 3,
-			"timeInterval": [20, 25],
-			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Medium", "Rock_Medium"]
-		},
-		{
-			"level": 4,
-			"timeInterval": [30, 40],
-			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Big"]
-		},
-		{
-			"level": 5,
-			"timeInterval": [45, 60],
-			"enemies": ["Rock_Medium", "Rock_Medium", "Rock_Giant", "Rock_Giant"]
-		},
-		{
-			"level": 6,
 			"timeInterval": [70, 90],
 			"enemies": ["Rock_Medium", "Rock_Medium", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Giant", "Rock_Giant",
-				"Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light"]
+				"Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Light"],
+			"powerups": ["Random", "Random"]
 		},
+
+
 		{
-			"level": 7,
+			"level": 4,
 			"timeInterval": [90, 150],
 			"enemies": ["Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant",
-				"Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant","Rock_Giant" ,"Rock_Giant"]
+				"Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant","Rock_Giant" ,"Rock_Giant"],
+			"powerups": ["Shield", "Shield", "Shield", "Random"]
 		}
 	]
 }

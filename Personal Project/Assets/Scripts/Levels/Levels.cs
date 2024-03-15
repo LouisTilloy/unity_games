@@ -5,14 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class Levels
 {
-    public List<Level> levels;
+    public List<LevelChunk> levelsChunks;
 }
 
 [System.Serializable]
-public class Level
+public class LevelChunk
 {
-    public int level;
+    public int level; // Which level the chunk belongs to
     public List<float> timeInterval;
     public List<string> enemies;
+    public List<string> powerups;
 }
 

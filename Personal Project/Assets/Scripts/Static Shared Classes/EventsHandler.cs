@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,9 @@ public class EventsHandler : MonoBehaviour
 
     public delegate void IntEventHandler(int powerupIndex);
     public static event IntEventHandler OnPowerupGrab;
+    
+    public delegate void ScoreEventHandler(Vector3 position, string rockType);
+    public static event ScoreEventHandler OnRockBrokenWithInfo;
 
     public static void InvokeOnGameOver()
     {
@@ -38,7 +42,6 @@ public class EventsHandler : MonoBehaviour
         OnProjectileFreeze?.Invoke();
     }
 
-
     public static void InvokeOnShieldCharged()
     {
         OnShieldCharged?.Invoke();
@@ -47,11 +50,6 @@ public class EventsHandler : MonoBehaviour
     public static void InvokeOnShieldBroken()
     {
         OnShieldBroken?.Invoke();
-    }
-
-    public static void InvokeOnRockBroken()
-    {
-        OnRockBroken?.Invoke();
     }
 
     public static void InvokeOnProjectileShot()
@@ -67,5 +65,14 @@ public class EventsHandler : MonoBehaviour
     public static void InvokeOnScreenResolutionChange()
     {
         OnScreenResolutionChange?.Invoke();
+    }
+
+    public static void InvokeOnRockBroken(Vector3? hitPosition = null, string rockType = null)
+    {
+        if (hitPosition is not null && rockType is not null)
+        {
+            OnRockBrokenWithInfo?.Invoke((Vector3)hitPosition, rockType);
+        }
+        OnRockBroken?.Invoke();
     }
 }

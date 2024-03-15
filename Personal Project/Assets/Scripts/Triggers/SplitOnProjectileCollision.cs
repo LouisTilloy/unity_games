@@ -22,7 +22,7 @@ public class SplitOnProjectileCollision : MonoBehaviour
             ReplaceCurrentWithNewPrefabs();
             triggered = true;
 
-            EventsHandler.InvokeOnRockBroken();
+            EventsHandler.InvokeOnRockBroken(transform.position, tag);
         }
     }
 
