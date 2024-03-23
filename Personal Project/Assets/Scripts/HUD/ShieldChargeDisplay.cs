@@ -3,29 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class ShieldChargeDisplay : MonoBehaviour
 {
     [SerializeField] ShieldPowerup shieldPowerupScript;
-    GameObject shieldChargeUI;
-    Slider shieldChargeSlider;
-    bool UIAlreadyActivated = false;
-    
-    void Start()
+    [SerializeField] Color backgroundColor;
+    [HideInInspector] public Image backgroundImage;
+
+    public void setActive(Image background)
     {
-        shieldChargeUI = transform.Find("ShieldChargeBar").gameObject;
-        shieldChargeSlider = shieldChargeUI.GetComponent<Slider>();
+        backgroundImage = background;
+        backgroundImage.fillAmount = 0.0f;
+        backgroundImage.color = backgroundColor;
+        enabled = true;
     }
 
     void Update()
     {
-        if (shieldPowerupScript.IsChargingActive())
+        if (shieldPowerupScript.IsChargingActive()) 
         {
-            if (!UIAlreadyActivated)
-            {
-                shieldChargeUI.SetActive(true);
-                UIAlreadyActivated = true;
-            }
-            shieldChargeSlider.value = shieldPowerupScript.ChargeCompletion();
+            backgroundImage.fillAmount = 1 - shieldPowerupScript.ChargeCompletion();
         }
     }
 }

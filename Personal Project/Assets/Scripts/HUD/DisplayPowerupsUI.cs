@@ -9,9 +9,12 @@ public class DisplayPowerupsUI : MonoBehaviour
 {
     [SerializeField] PowerupManager powerupManager;
     [SerializeField] List<Sprite> powerupSprites;
+    [SerializeField] List<Sprite> powerupDeactivatedSprites;
 
+    ShieldChargeDisplay shieldDisplayScript;
     List<GameObject> powerupSlots;
     List<Image> powerupSlotImages;
+    List<Image> powerupSlotBackgroundImages;
     List<TextMeshProUGUI> powerupTexts;
 
     Dictionary<int, int> powerupIndexToSlotIndex;
@@ -19,15 +22,19 @@ public class DisplayPowerupsUI : MonoBehaviour
 
     void Start()
     {
+        shieldDisplayScript = GetComponent<ShieldChargeDisplay>();
+
         GameObject currentPowerupSlot;
         powerupSlots = new List<GameObject>();
         powerupSlotImages = new List<Image>();
+        powerupSlotBackgroundImages = new List<Image>();
         powerupTexts = new List<TextMeshProUGUI>();
         for (int slotIndex = 0; slotIndex < transform.childCount; slotIndex++)
         {
             currentPowerupSlot = transform.GetChild(slotIndex).gameObject;
             powerupSlots.Add(currentPowerupSlot);
             powerupSlotImages.Add(currentPowerupSlot.GetComponent<Image>());
+            powerupSlotBackgroundImages.Add(currentPowerupSlot.transform.Find("BackgroundImage").GetComponent<Image>());
             powerupTexts.Add(currentPowerupSlot.GetComponentInChildren<TextMeshProUGUI>());
         }
         powerupIndexToSlotIndex = new Dictionary<int, int>();
@@ -63,6 +70,16 @@ public class DisplayPowerupsUI : MonoBehaviour
                 powerupIndexToSlotIndex[powerupIndex] = powerupSlotIndex;
                 powerupSlots[powerupSlotIndex].SetActive(true);
                 powerupSlotImages[powerupSlotIndex].sprite = powerupSprites[powerupIndex];
+                // Also assign background image if it exists
+                if (powerupDeactivatedSprites[powerupIndex] != null)
+                {
+                    Debug.Log(powerupDeactivatedSprites[powerupIndex]);
+                    Debug.Log(powerupIndex);
+                    GameObject backgroundImage = powerupSlots[powerupSlotIndex].transform.Find("BackgroundImage").gameObject;
+                    backgroundImage.SetActive(true);
+                    powerupSlotBackgroundImages[powerupSlotIndex].sprite = powerupDeactivatedSprites[powerupIndex];
+                    shieldDisplayScript.setActive(powerupSlotBackgroundImages[powerupSlotIndex]);
+                }
             }
             
             // We finally update the level of the powerup in the UI
