@@ -2,11 +2,28 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 
 public class SharedUtils
 {
+
+    public static IEnumerator DisplayAndFade(GameObject textObject, TextMeshProUGUI textComponent, float displayTime, float fadeTime)
+    {
+        textComponent.alpha = 1.0f;
+        textObject.SetActive(true);
+        yield return new WaitForSeconds(displayTime);
+        float timer = 0;
+        while (timer < fadeTime)
+        {
+            textComponent.alpha = Mathf.Lerp(1.0f, 0.0f, timer / fadeTime);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        textObject.SetActive(false);
+    }
+
     public static int RockNameToPrefabIndex(string rockName)
     {
         switch (rockName)
@@ -35,6 +52,20 @@ public class SharedUtils
                 return 2;
             case "Random":
                 return UnityEngine.Random.Range(0, 3);
+        }
+        throw new ArgumentException();
+    }
+
+    public static string PowerupIndexToName(int powerupIndex)
+    {
+        switch (powerupIndex)
+        {
+            case 0:
+                return "Extra_Projectile";
+            case 1:
+                return "Freeze";
+            case 2:
+                return "Shield";
         }
         throw new ArgumentException();
     }

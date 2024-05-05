@@ -73,8 +73,6 @@ public class DisplayPowerupsUI : MonoBehaviour
                 // Also assign background image if it exists
                 if (powerupDeactivatedSprites[powerupIndex] != null)
                 {
-                    Debug.Log(powerupDeactivatedSprites[powerupIndex]);
-                    Debug.Log(powerupIndex);
                     GameObject backgroundImage = powerupSlots[powerupSlotIndex].transform.Find("BackgroundImage").gameObject;
                     backgroundImage.SetActive(true);
                     powerupSlotBackgroundImages[powerupSlotIndex].sprite = powerupDeactivatedSprites[powerupIndex];

@@ -3,9 +3,9 @@
 	[
 		{
 			"level": 1,
-			"timeInterval": [6, 6],
+			"timeInterval": [1, 1],
 			"enemies": ["Rock_Light"],
-			"powerups": []
+			"powerups": ["Shield"]
 		},
 		{
 			"level": 1,
@@ -23,7 +23,7 @@
 		},
 		{
 			"level": 2,
-			"timeInterval": [30, 40],
+			"timeInterval": [30, 40],	
 			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Big"],
 			"powerups": ["Random"]
 		},

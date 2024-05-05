@@ -1,0 +1,17 @@
+{
+	"level": 1,
+	"levelsChunks":
+	[
+		{
+			"timeInterval": [1, 1],
+			"enemies": ["Rock_Light"],
+			"powerups": ["Shield"]
+		},
+		{
+			"timeInterval": [10, 15],
+			"enemies": ["Rock_Medium"],
+			"powerups": ["Extra_Projectile"]
+		}
+
+	]
+}

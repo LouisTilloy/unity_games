@@ -16,11 +16,14 @@ public class EventsHandler : MonoBehaviour
     public static event GeneralEventHandler OnProjectileShot;
     public static event GeneralEventHandler OnScreenResolutionChange;
 
-    public delegate void IntEventHandler(int powerupIndex);
-    public static event IntEventHandler OnPowerupGrab;
+    public delegate void PowerupEventHandler(int powerupIndex);
+    public static event PowerupEventHandler OnPowerupGrab;
     
     public delegate void ScoreEventHandler(Vector3 position, string rockType);
     public static event ScoreEventHandler OnRockBrokenWithInfo;
+
+    public delegate void PowerupEventHandlerWithPos(int powerupIndex, Vector3 position);
+    public static event PowerupEventHandlerWithPos OnPowerupGrabWithInfo;
 
     public static void InvokeOnGameOver()
     {
@@ -57,11 +60,6 @@ public class EventsHandler : MonoBehaviour
         OnProjectileShot?.Invoke();
     }
 
-    public static void InvokeOnPowerupGrab(int powerupIndex)
-    {
-        OnPowerupGrab?.Invoke(powerupIndex);
-    }
-
     public static void InvokeOnScreenResolutionChange()
     {
         OnScreenResolutionChange?.Invoke();
@@ -74,5 +72,14 @@ public class EventsHandler : MonoBehaviour
             OnRockBrokenWithInfo?.Invoke((Vector3)hitPosition, rockType);
         }
         OnRockBroken?.Invoke();
+    }
+
+    public static void InvokeOnPowerupGrab(int powerupIndex, Vector3? hitPosition = null)
+    {
+        if (hitPosition is not null)
+        {
+            OnPowerupGrabWithInfo?.Invoke(powerupIndex, (Vector3)hitPosition);
+        }
+        OnPowerupGrab?.Invoke(powerupIndex);
     }
 }

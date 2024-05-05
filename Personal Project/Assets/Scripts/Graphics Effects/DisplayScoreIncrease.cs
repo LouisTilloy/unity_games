@@ -31,35 +31,22 @@ public class DisplayScoreIncrease : MonoBehaviour
         // Get score and screen position
         int score = scoreManager.RockScore(rockTag);
         int rockIndex = SharedUtils.RockNameToPrefabIndex(rockTag);
-        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, hitPosition);
+        Vector3 screenPosition = Camera.main.WorldToScreenPoint(hitPosition);
+        // Vector3 viewportPos = Camera.main.WorldToViewportPoint(hitPosition);
+        // Vector3 screenPosition = new Vector3(viewportPos.x * Screen.width, viewportPos.y * Screen.height, 0.0f);
 
         // Get a pooled text object and modify its text and position.
         GameObject textObject = textObjectPooling.GetPooledObject();
         TextMeshProUGUI textComponent = textObject.GetComponent<TextMeshProUGUI>();
-        textComponent.alpha = 1.0f;
         textComponent.text = "+ " + score.ToString();
         textComponent.fontSize = fontSizes[rockIndex];
         textComponent.color = colors[rockIndex];
-        textComponent.rectTransform.position = (Vector3)screenPosition;
+        textComponent.rectTransform.position = screenPosition;
 
         // Display it for some time
-        StartCoroutine(DisplayAndFade(textObject, textComponent));
+        StartCoroutine(SharedUtils.DisplayAndFade(textObject, textComponent, displayTime, fadeTime));
         // Make it jump
         StartCoroutine(ScoreJump(textComponent));
-    }
-
-    IEnumerator DisplayAndFade(GameObject textObject, TextMeshProUGUI textComponent)
-    {
-        textObject.SetActive(true);
-        yield return new WaitForSeconds(displayTime);
-        float timer = 0;
-        while (timer < fadeTime)
-        {
-            textComponent.alpha = Mathf.Lerp(1.0f, 0.0f, timer / fadeTime);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        textObject.SetActive(false);
     }
 
     float JumpXtoY(float x)
@@ -70,14 +57,14 @@ public class DisplayScoreIncrease : MonoBehaviour
     IEnumerator ScoreJump(TextMeshProUGUI textComponent)
     {
         float timer = 0;
-        Vector2 textInitialPos = textComponent.rectTransform.localPosition;
+        Vector3 textInitialPos = textComponent.rectTransform.position;
         float textXPos;
         float textYPos;
         while (timer < TotalDisplayTime())
         {
             textXPos = Mathf.Lerp(textInitialPos.x, textInitialPos.x + trajectoryLength, timer / TotalDisplayTime());
-            textYPos = JumpXtoY(textXPos - textInitialPos.x);
-            textComponent.rectTransform.localPosition = new Vector2(textXPos, textYPos);
+            textYPos = JumpXtoY(textXPos - textInitialPos.x) + textInitialPos.y;
+            textComponent.rectTransform.position = new Vector3(textXPos, textYPos);
             timer += Time.deltaTime;
             yield return null;
         }
