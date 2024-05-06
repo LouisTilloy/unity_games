@@ -4,11 +4,21 @@
 	[
 		{
 			"timeInterval": [1, 1],
-			"enemies": ["Rock_Light"],
+			"enemies": ["Rock_UltraGiant"],
 			"powerups": ["Shield"]
 		},
 		{
-			"timeInterval": [10, 15],
+			"timeInterval": [50, 50],
+			"enemies": ["Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Giant", "Rock_SuperGiant", "Rock_UltraGiant", "Rock_MegaGiant"],
+			"powerups": ["Shield"]
+		},
+		{
+			"timeInterval": [100, 100],
+			"enemies": ["Rock_MegaGiant"],
+			"powerups": ["Shield"]
+		},
+		{
+			"timeInterval": [300, 400],
 			"enemies": ["Rock_Medium"],
 			"powerups": ["Extra_Projectile"]
 		}

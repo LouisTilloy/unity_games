@@ -6,7 +6,7 @@ public class BounceOnWall : MonoBehaviour
 {
     public bool isScriptActive = true;
 
-    private float wallMarginForceDirection = 1.1f;
+    private float wallMarginForceDirection = 0.0f;
     private GameObject[] walls; // walls[0]: left, walls[1]: right
     private Collider thisCollider;
     private MoveRight moveRightScript;
@@ -19,10 +19,20 @@ public class BounceOnWall : MonoBehaviour
 
     private void Update()
     {
-        // Between 5 and 10, it will just keep the boolean assigned at initialization
-        if (Mathf.Abs(transform.position.x) < 5)
+        // Deactivate collision with walls if the rock is not fully in the screen.
+        if (!isScriptActive)
+        {
+            Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider);
+            Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider);
+        }
+
+        // Between 1 and 10, it will just keep the boolean assigned at initialization.
+        if (Mathf.Abs(transform.position.x) < 1)
         {
             isScriptActive = true;
+            // Activate collision with walls once the rock is towards the middle.
+            Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider, false);
+            Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider, false);
         }
 
         // If a rock happens to be past the walls (because spawned from a rock that didnt quite enter yet)
@@ -39,21 +49,19 @@ public class BounceOnWall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!isScriptActive) {
-            Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider);
-            Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider);
-            return;
-        }
-        else
-        {
-            Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider, false);
-            Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider, false);
-        }
-
         if (collision.gameObject.name.Contains("Wall"))
         {
             moveRightScript.horizontalSpeed *= -1;
         }
     }
+    /*
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name.Contains("Wall"))
+        {
+            isScriptActive = true;
+        }
+    }
+    */
 
 }

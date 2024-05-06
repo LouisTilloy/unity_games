@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7fdfe8f41214f4e89da1f4641f04f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 3
   horizontalSpeed: 3
-  rotate: 1
 --- !u!114 &1301767926846705825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +195,9 @@ MonoBehaviour:
   - {fileID: 7084834733365910119, guid: f1ff437423b1ec3429d141a2e8c895f4, type: 3}
   - {fileID: 3734435166818868669, guid: c1272fc3038e50244a315b8710be1fbe, type: 3}
   - {fileID: 6308930757579900746, guid: 8105ad18a1329cc4d9ac091c33eecea8, type: 3}
+  - {fileID: 3066551622967256142, guid: fc34b235c98d1c24fad31b06e3272317, type: 3}
+  - {fileID: 3066551622967256142, guid: d675d67ce89c5fe4fba137204961a515, type: 3}
+  - {fileID: 3066551622967256142, guid: 9137eb6cbbb5cb942aca5fbeb8fdfb9b, type: 3}
 --- !u!114 &5348214654967912288
 MonoBehaviour:
   m_ObjectHideFlags: 0

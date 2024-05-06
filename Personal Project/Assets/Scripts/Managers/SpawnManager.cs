@@ -16,6 +16,7 @@ public class SpawnManager : MonoBehaviour
 {
     // Levels configuration
     [SerializeField] string levelsDirectoryPath;
+    [SerializeField] float timeBeforeLevelTransition;
     // Levels internal variables
     List<Level> levelConfigs;
     int currentLevel = 1;
@@ -27,12 +28,14 @@ public class SpawnManager : MonoBehaviour
 
     // General
     List<GameObject> allSpawnedObjects;
+    List<string> tagsOfInterest;
+    bool levelLoading = false;
 
     // Rocks
     [SerializeField] GameObject[] rocks;
-    [SerializeField] float xSpawnPos1080p;
+    [SerializeField] float xBaseSpawnPos1080p;
     float xSpawnPos;
-    [SerializeField] float initialUpBoost;
+    [SerializeField] List<float> initialUpBoosts;
 
     // Powerups
     [SerializeField] float powerupSpawnInitialDelay;
@@ -58,14 +61,22 @@ public class SpawnManager : MonoBehaviour
         powerupsSpawnTimes = new Queue<float>();
         powerupsToSpawn = new Queue<string>();
 
+        tagsOfInterest = SharedUtils.AllRockTags();
+        tagsOfInterest.Add("Powerup");
+
         levelConfigs = JsonReader.ReadAllLevels(levelsDirectoryPath);
         ScaleSpawnPosWithScreen();
         EventsHandler.OnScreenResolutionChange += ScaleSpawnPosWithScreen;
+
+        EventsHandler.InvokeOnLevelTransition(currentLevel);
     }
 
 
     void Update()
     {
+        // Stop update loop until next level is loaded
+        if (levelLoading) { return; }
+        
         // Levels handling - (levels start at 1, not 0)
         // - If we are within the next chunk time interval, start the next chunk of the level.
         if (NextLevelChunkIsDue())
@@ -97,10 +108,7 @@ public class SpawnManager : MonoBehaviour
         // If no more enemies and powerups are present switch to the next level.
         if (LastChunkOfLevelOver() && AllSpawnedObjectsDestroyed())
         {
-            allSpawnedObjects.Clear();
-            clockTime = 0.0f;
-            currentLevel++;
-            currentLevelChunk = 0;
+            StartCoroutine(LoadNextLevelAfterTime(timeBeforeLevelTransition));
         }
 
         clockTime += Time.deltaTime;
@@ -108,6 +116,16 @@ public class SpawnManager : MonoBehaviour
 
     bool AllSpawnedObjectsDestroyed()
     {
+        foreach (string tag in tagsOfInterest)
+        {
+            if (GameObject.FindWithTag(tag) != null)
+            {
+                return false;
+            }
+        }
+        return true;
+        
+        /*
         foreach (GameObject obj in allSpawnedObjects)
         {
             if (obj != null)
@@ -117,6 +135,7 @@ public class SpawnManager : MonoBehaviour
             }
         }
         return true;
+        */
     }
 
     bool LastChunkOfLevelOver()
@@ -131,6 +150,21 @@ public class SpawnManager : MonoBehaviour
         int nextLevelChunk = currentLevelChunk + 1;
         return nextLevelChunk - 1 < levelConfigs[currentLevel - 1].levelsChunks.Count
                && levelConfigs[currentLevel - 1].levelsChunks[nextLevelChunk - 1].timeInterval[0] <= clockTime;
+    }
+
+    IEnumerator LoadNextLevelAfterTime(float time)
+    {
+        levelLoading = true;
+
+        yield return new WaitForSeconds(time);
+        
+        allSpawnedObjects.Clear();
+        clockTime = 0.0f;
+        currentLevel++;
+        currentLevelChunk = 0;
+        levelLoading = false;
+
+        EventsHandler.InvokeOnLevelTransition(currentLevel);
     }
 
     /*
@@ -194,24 +228,36 @@ public class SpawnManager : MonoBehaviour
 
     void ScaleSpawnPosWithScreen()
     {
-        xSpawnPos = xSpawnPos1080p * SharedUtils.AspectRatioScalingFactor();
+        xSpawnPos = xBaseSpawnPos1080p * SharedUtils.AspectRatioScalingFactor();
     }
 
     private float RockSpawnYPosition(GameObject rock)
     {
         float bounceStrength = rock.GetComponent<BounceOnGround>().bounceStrength;
-        return bounceStrength - 4.0f;  // found empirically to correspond with the max height
+        return bounceStrength - 5.0f + rock.transform.localScale.x / 3;  // found empirically to correspond with the max height
     }
 
     GameObject SpawnRockAtRandomPos(string rockName)
     {
+        // Choose if spawn from the right or from the left side.
         int randomDirection = UnityEngine.Random.Range(0, 2) * 2 - 1;  // -1 or 1
+        
+        // Instantiate the rock corresponding to the name at a given positon.
         GameObject rockPrefab = rocks[SharedUtils.RockNameToPrefabIndex(rockName)];
-        Vector3 spawnPosition = new Vector3(xSpawnPos * randomDirection, RockSpawnYPosition(rockPrefab), rockPrefab.transform.position.z);
+        Vector3 spawnPosition = new Vector3(
+            (xSpawnPos + rockPrefab.transform.localScale.x / 3) * randomDirection, 
+            RockSpawnYPosition(rockPrefab), 
+            rockPrefab.transform.position.z
+        );
         GameObject rock = Instantiate(rockPrefab, spawnPosition, Quaternion.identity);
+
+        // Setup rock components, including original force and velocity.
+        float initialUpBoost = initialUpBoosts[SharedUtils.RockNameToPrefabIndex(rockName)];
         rock.GetComponent<Rigidbody>().AddForce(initialUpBoost * Vector3.up, ForceMode.Impulse);
         rock.GetComponent<MoveRight>().horizontalSpeed *= -1 * randomDirection;
         rock.GetComponent<BounceOnWall>().isScriptActive = false;
+        
+        // Return the instantiated rock.
         return rock;
     }
 

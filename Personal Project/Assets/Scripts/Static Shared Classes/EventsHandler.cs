@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EventsHandler : MonoBehaviour
@@ -16,8 +13,9 @@ public class EventsHandler : MonoBehaviour
     public static event GeneralEventHandler OnProjectileShot;
     public static event GeneralEventHandler OnScreenResolutionChange;
 
-    public delegate void PowerupEventHandler(int powerupIndex);
-    public static event PowerupEventHandler OnPowerupGrab;
+    public delegate void IntEventHandler(int param);
+    public static event IntEventHandler OnPowerupGrab;
+    public static event IntEventHandler OnLevelTransition;
     
     public delegate void ScoreEventHandler(Vector3 position, string rockType);
     public static event ScoreEventHandler OnRockBrokenWithInfo;
@@ -81,5 +79,10 @@ public class EventsHandler : MonoBehaviour
             OnPowerupGrabWithInfo?.Invoke(powerupIndex, (Vector3)hitPosition);
         }
         OnPowerupGrab?.Invoke(powerupIndex);
+    }
+
+    public static void InvokeOnLevelTransition(int nextLevel)
+    {
+        OnLevelTransition?.Invoke(nextLevel);
     }
 }

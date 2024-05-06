@@ -4,7 +4,7 @@ public class KeepInBounds : MonoBehaviour
 {
     // Reference Resolution: 1920p x 1080p
     float horizontalBound;
-    float referenceHorizontalBound = 8.50f;
+    [SerializeField] float referenceHorizontalBound;
 
     private void Start()
     {

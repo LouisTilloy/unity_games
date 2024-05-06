@@ -9,6 +9,20 @@ using UnityEngine;
 public class SharedUtils
 {
 
+    public static List<string> AllRockTags()
+    {
+        return new List<string> { "Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Giant", "Rock_SuperGiant", "Rock_UltraGiant", "Rock_MegaGiant" };
+    }
+
+
+    public static IEnumerator WaitDisplayAndFade(
+        GameObject textObject, TextMeshProUGUI textComponent, float waitTime, float displayTime, float fadeTime
+    )
+    {
+        yield return new WaitForSeconds( waitTime );
+        yield return DisplayAndFade(textObject, textComponent, displayTime, fadeTime );
+    }
+
     public static IEnumerator DisplayAndFade(GameObject textObject, TextMeshProUGUI textComponent, float displayTime, float fadeTime)
     {
         textComponent.alpha = 1.0f;
@@ -36,6 +50,12 @@ public class SharedUtils
                 return 2;
             case "Rock_Giant":
                 return 3;
+            case "Rock_SuperGiant":
+                return 4;
+            case "Rock_UltraGiant":
+                return 5;
+            case "Rock_MegaGiant":
+                return 6;
         }
         throw new ArgumentException();
     }

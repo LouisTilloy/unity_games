@@ -3,10 +3,13 @@
 	"levelsChunks":
 	[
 		{
-			
-			"timeInterval": [5, 65],
-			"enemies": ["Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant",
-				"Rock_Giant", "Rock_Giant", "Rock_Giant", "Rock_Giant","Rock_Giant" ,"Rock_Giant"],
+			"timeInterval": [2, 2],
+			"enemies": ["Rock_Medium"],
+			"powerups": []
+		},
+		{
+			"timeInterval": [2, 65],
+			"enemies": ["Rock_SuperGiant"],
 			"powerups": ["Shield", "Shield", "Shield", "Random"]
 		}
 	]

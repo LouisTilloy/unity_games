@@ -12,6 +12,9 @@ TagManager:
   - Rock_Medium
   - Rock_Light
   - Wall
+  - Rock_SuperGiant
+  - Rock_UltraGiant
+  - Rock_MegaGiant
   layers:
   - Default
   - TransparentFX
@@ -48,6 +51,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Rock_UltraGiant
+    uniqueID: 3902907113
+    locked: 0
+  - name: Rock_SuperGiant
+    uniqueID: 1238364707
     locked: 0
   - name: Rock_Giant
     uniqueID: 1987419775

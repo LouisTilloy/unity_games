@@ -11,6 +11,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] int scoreMedium;
     [SerializeField] int scoreBig;
     [SerializeField] int scoreGiant;
+    [SerializeField] int scoreSuperGiant;
+    [SerializeField] int scoreUltraGiant;
+    [SerializeField] int scoreMegaGiant;
 
     public float Score()
     {
@@ -38,6 +41,15 @@ public class ScoreManager : MonoBehaviour
                 break;
             case "Rock_Giant":
                 scoreIncrease = scoreGiant;
+                break;
+            case "Rock_SuperGiant":
+                scoreIncrease = scoreSuperGiant;
+                break;
+            case "Rock_UltraGiant":
+                scoreIncrease = scoreUltraGiant;
+                break;
+            case "Rock_MegaGiant":
+                scoreIncrease = scoreMegaGiant;
                 break;
             default:
                 throw new ArgumentException();
