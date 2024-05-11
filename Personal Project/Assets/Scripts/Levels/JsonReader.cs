@@ -21,6 +21,6 @@ public static class JsonReader
             TextAsset jsonFile = Resources.Load<TextAsset>(filePath);
             allLevels.Add(JsonUtility.FromJson<Level>(jsonFile.text));
         }
-        return allLevels;
+        return allLevels.OrderBy(x => x.level).ToList();
     }
 }

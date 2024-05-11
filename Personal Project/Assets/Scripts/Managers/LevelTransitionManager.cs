@@ -6,11 +6,14 @@ using UnityEngine;
 public class LevelTransitionManager : MonoBehaviour
 {
     [SerializeField] GameObject levelText;
-    [SerializeField] List<GameObject> levelBackgrounds;
+    [SerializeField] List<GameObject> levelBackgroundsTop;
+    [SerializeField] List<GameObject> levelBackgroundsBottom;
+    [SerializeField] List<int> startLevels;
     [SerializeField] float waitTime;
     [SerializeField] float displayTime;
     [SerializeField] float fadeTime;
 
+    int currentBackgroundIndex = 0;
     TextMeshProUGUI levelTextComponent;
 
     private void Awake()
@@ -21,6 +24,7 @@ public class LevelTransitionManager : MonoBehaviour
 
     void LevelTransition(int nextLevel)
     {
+        // Display level Text
         float waitTimeOverride;
         if (nextLevel == 1)
         {
@@ -32,6 +36,16 @@ public class LevelTransitionManager : MonoBehaviour
         }
         levelTextComponent.text = $"Level {nextLevel}";
         StartCoroutine(SharedUtils.WaitDisplayAndFade(levelText, levelTextComponent, waitTimeOverride, displayTime, fadeTime));
+
+        // Change background image
+        if (currentBackgroundIndex - 1 < startLevels.Count && nextLevel >= startLevels[currentBackgroundIndex + 1])
+        {
+            levelBackgroundsTop[currentBackgroundIndex].SetActive(false);
+            levelBackgroundsBottom[currentBackgroundIndex].SetActive(false);
+            currentBackgroundIndex++;
+            levelBackgroundsTop[currentBackgroundIndex].SetActive(true);
+            levelBackgroundsBottom[currentBackgroundIndex].SetActive(true);
+        }
     }
 
     private void OnDestroy()

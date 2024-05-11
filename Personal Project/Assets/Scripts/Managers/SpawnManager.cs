@@ -20,7 +20,7 @@ public class SpawnManager : MonoBehaviour
     // Levels internal variables
     List<Level> levelConfigs;
     int currentLevel = 1;
-    int currentLevelChunk = 0;  // levek chunks start at 1, so this is firstLevelChunk - 1
+    int currentLevelChunk = 0;  // level chunks start at 1, so this is firstLevelChunk - 1
     Queue<float> rocksSpawnTimes;
     Queue<string> rocksToSpawn;
     Queue<float> powerupsSpawnTimes;
@@ -76,7 +76,7 @@ public class SpawnManager : MonoBehaviour
     {
         // Stop update loop until next level is loaded
         if (levelLoading) { return; }
-        
+
         // Levels handling - (levels start at 1, not 0)
         // - If we are within the next chunk time interval, start the next chunk of the level.
         if (NextLevelChunkIsDue())

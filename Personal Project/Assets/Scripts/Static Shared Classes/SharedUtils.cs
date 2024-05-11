@@ -57,7 +57,7 @@ public class SharedUtils
             case "Rock_MegaGiant":
                 return 6;
         }
-        throw new ArgumentException();
+        throw new ArgumentException(rockName);
     }
 
     public static int PowerupNameToIndex(string powerupName)
