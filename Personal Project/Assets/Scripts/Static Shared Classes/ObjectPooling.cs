@@ -6,8 +6,8 @@ using UnityEngine.Pool;
 public class ObjectPooling : MonoBehaviour
 {
     [SerializeField] GameObject objectPrefab;
-    public List<GameObject> pooledObjects;
-    int nObjects = 10;
+    [HideInInspector] public List<GameObject> pooledObjects;
+    [SerializeField] int nObjects = 10;
 
     void Awake()
     {

@@ -1,0 +1,21 @@
+{
+	"level": 16,	
+	"levelsChunks":
+	[
+		{
+			"timeInterval": [2, 3],
+			"enemies": ["Rock_Medium"],
+			"powerups": []
+		},
+		{
+			"timeInterval": [5, 6],
+			"enemies": ["Rock_SuperGiant"],
+			"powerups": []
+		},
+		{
+			"timeInterval": [10, 20],
+			"enemies": ["Rock_Big", "Rock_Big", "Rock_Big"],
+			"powerups": ["Random"]
+		}
+	]
+}

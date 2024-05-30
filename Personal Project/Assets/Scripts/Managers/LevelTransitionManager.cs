@@ -38,7 +38,7 @@ public class LevelTransitionManager : MonoBehaviour
         StartCoroutine(SharedUtils.WaitDisplayAndFade(levelText, levelTextComponent, waitTimeOverride, displayTime, fadeTime));
 
         // Change background image
-        if (currentBackgroundIndex - 1 < startLevels.Count && nextLevel >= startLevels[currentBackgroundIndex + 1])
+        if (currentBackgroundIndex + 1 < startLevels.Count && nextLevel >= startLevels[currentBackgroundIndex + 1])
         {
             levelBackgroundsTop[currentBackgroundIndex].SetActive(false);
             levelBackgroundsBottom[currentBackgroundIndex].SetActive(false);

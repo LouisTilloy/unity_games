@@ -1,12 +1,23 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SplitOnProjectileCollision : MonoBehaviour
 {
-    bool triggered = false;
-    [SerializeField]
-    private GameObject[] ballPrefabs;
-    
+    bool triggered;
+    List<ObjectPooling> rocksPooling;
+
+    void Awake()
+    {
+        rocksPooling = GameObject.FindGameObjectWithTag("SpawnManager").GetComponent<SpawnManager>().rocksPooling;
+    }
+
+    void OnEnable()
+    {
+        triggered = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Only interact with projectiles
@@ -18,37 +29,66 @@ public class SplitOnProjectileCollision : MonoBehaviour
         {
             other.GetComponentInParent<NumberOfTriggers>().numberOfTriggers = 1;
             other.transform.parent.gameObject.SetActive(false);
-            
-            ReplaceCurrentWithNewPrefabs();
+
+            // ReplaceCurrentWithNewPrefabs();
+            StartCoroutine(ReplaceCurrentWithNewPrefabs());
             triggered = true;
 
             EventsHandler.InvokeOnRockBroken(transform.position, tag);
         }
     }
+    IEnumerator ReplaceCurrentWithNewPrefabs()
+    {
+        int nextIndex = SharedUtils.RockNameToPrefabIndex(gameObject.tag) - 1;
+        if (nextIndex >= 0)
+        {
+            for (int direction = -1; direction < 2; direction += 2)
+            {
+                // Get smaller rock from pool
+                GameObject ball = rocksPooling[nextIndex].GetPooledObject();
+                // Set its position to where the previous rock was hit
+                ball.transform.position = transform.position;
+                // Make sure its vertical speed is 0
+                Rigidbody leftRigidbody = ball.GetComponent<Rigidbody>();
+                leftRigidbody.velocity = Vector3.zero;
+                // Make 1 rock go to the opposite direction as the other
+                MoveRight moveRightScript = ball.GetComponent<MoveRight>();
+                moveRightScript.horizontalSpeed = direction * Mathf.Abs(moveRightScript.horizontalSpeed);
+                // Activate the rock
+                ball.GetComponent<BounceOnWall>().isScriptActive = true;
+                ball.SetActive(true);
 
+                yield return new WaitForEndOfFrame();
+            }
+        }
+        // Deactivate the rock that was hit
+        gameObject.SetActive(false);
+    }
+
+    /*
     private void ReplaceCurrentWithNewPrefabs() 
     {
         int nextIndex = SharedUtils.RockNameToPrefabIndex(gameObject.tag) - 1;
         if (nextIndex >= 0)
         {
-            // Instantiate 2 new rocks
-            GameObject ballLeft = Instantiate(ballPrefabs[nextIndex]);
-            GameObject ballRight = Instantiate(ballPrefabs[nextIndex]);
-
-            // Make sure their speed vertical speed is 0
-            Rigidbody leftRigidbody = ballLeft.GetComponent<Rigidbody>();
-            leftRigidbody.velocity = new Vector3(leftRigidbody.velocity.x, 0.0f, 0.0f);
-            Rigidbody rightRigidbody = ballLeft.GetComponent<Rigidbody>();
-            rightRigidbody.velocity = new Vector3(rightRigidbody.velocity.x, 0.0f, 0.0f);
-
-            // Set their position to where the previous rock was hit
-            ballLeft.transform.position = transform.position;
-            ballRight.transform.position = transform.position;
-
-            // Make 1 rock go to the opposite direction as the other
-            ballLeft.GetComponent<MoveRight>().horizontalSpeed *= -1;
+            for (int direction = -1; direction < 0; direction += 2) 
+            {
+                // Get smaller rock from pool
+                GameObject ball = rocksPooling[nextIndex].GetPooledObject();
+                // Set its position to where the previous rock was hit
+                ball.transform.position = transform.position;
+                // Make sure its vertical speed is 0
+                Rigidbody leftRigidbody = ball.GetComponent<Rigidbody>();
+                leftRigidbody.velocity = Vector3.zero;
+                // Make 1 rock go to the opposite direction as the other
+                MoveRight moveRightScript = ball.GetComponent<MoveRight>();
+                moveRightScript.horizontalSpeed = direction * Mathf.Abs(moveRightScript.horizontalSpeed);
+                // Activate the rock
+                ball.SetActive(true);
+            }
         }
-        Destroy(gameObject);
+        // Deactivate the rock that was hit
+        gameObject.SetActive(false);
     }
-
+    */
 }

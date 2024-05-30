@@ -10,7 +10,7 @@ public class BounceOnWall : MonoBehaviour
     private GameObject[] walls; // walls[0]: left, walls[1]: right
     private Collider thisCollider;
     private MoveRight moveRightScript;
-    void Start()
+    void Awake()
     {
         moveRightScript = GetComponent<MoveRight>();
         thisCollider = GetComponent<Collider>();

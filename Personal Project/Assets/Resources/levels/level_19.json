@@ -1,0 +1,11 @@
+{
+	"level": 19,	
+	"levelsChunks":
+	[
+		{
+			"timeInterval": [2, 3],
+			"enemies": ["Rock_UltraGiant"],
+			"powerups": ["Random"]
+		}
+	]
+}

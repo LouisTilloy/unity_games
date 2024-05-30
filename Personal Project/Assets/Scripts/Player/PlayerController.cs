@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] ObjectPooling objectPooling;
+    [SerializeField] PauseMenu pauseMenu;
     public float speed;
     List<GameObject> launchedProjectiles;
     PowerupManager powerupManager;
@@ -33,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
         // Shoot projectile
         GameObject lastProjectile;
-        if (Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
+        if (!pauseMenu.isGamePaused && Input.GetButtonDown("Fire") && launchedProjectiles.Count < MaxProjectileCount())
         {
             lastProjectile = objectPooling.GetPooledObject();
             lastProjectile.transform.position = transform.position;

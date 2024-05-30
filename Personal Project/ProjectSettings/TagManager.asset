@@ -15,6 +15,7 @@ TagManager:
   - Rock_SuperGiant
   - Rock_UltraGiant
   - Rock_MegaGiant
+  - SpawnManager
   layers:
   - Default
   - TransparentFX

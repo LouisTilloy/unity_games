@@ -1,24 +1,26 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public static class JsonReader
+public class JsonReader
 {
-    public static Level ReadLevelJson(TextAsset jsonFile)
+    List<TextAsset> levelJsons;
+
+    public Level ReadLevelJson(TextAsset jsonFile)
     {
         return JsonUtility.FromJson<Level>(jsonFile.text);
     }
 
-    public static List<Level> ReadAllLevels(string directoryPath)
+    public List<Level> ReadAllLevels()
     {
         List<Level> allLevels = new List<Level>();
-        DirectoryInfo dirInfo = new DirectoryInfo(directoryPath);
-        foreach (FileInfo file in dirInfo.GetFiles("*.json"))
+        foreach (TextAsset jsonFile in levelJsons)
         {
-            string filePath = "levels/" + Path.GetFileNameWithoutExtension(file.Name);
-            TextAsset jsonFile = Resources.Load<TextAsset>(filePath);
             allLevels.Add(JsonUtility.FromJson<Level>(jsonFile.text));
         }
         return allLevels.OrderBy(x => x.level).ToList();

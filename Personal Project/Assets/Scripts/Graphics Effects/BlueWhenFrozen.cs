@@ -8,6 +8,7 @@ public class BlueWhenFrozen : MonoBehaviour
     [SerializeField] List<Material> frozenColorMaterials;
     [SerializeField] List<Material> defaultMaterials;
 
+    GameObject freezeParticlesObject;
     FreezeMovement freezeMovementScript;
     List<MeshRenderer> renderers;
     bool switchHappened = false;
@@ -20,6 +21,8 @@ public class BlueWhenFrozen : MonoBehaviour
             renderer.material = defaultMaterials[idx];
             idx++;
         }
+        freezeParticlesObject = transform.GetChild(2).gameObject;
+        freezeParticlesObject.SetActive(false);
         switchHappened = false;
     }
 
@@ -40,6 +43,8 @@ public class BlueWhenFrozen : MonoBehaviour
         {
             renderers[0].material = frozenColorMaterials[0];
             renderers[1].material = frozenColorMaterials[1];
+            freezeParticlesObject.SetActive(true);
+            freezeParticlesObject.GetComponent<ParticleSystem>().Emit(40);
             switchHappened = true;
         }
     }

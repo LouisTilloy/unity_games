@@ -1,20 +1,21 @@
 {
-	"level": 9,	
+	"level": 9,
 	"levelsChunks":
 	[
 		{
-			"timeInterval": [2, 4],
-			"enemies": ["Rock_SuperGiant"],
+			"timeInterval": [1, 2],
+			"enemies": ["Rock_Medium"],
 			"powerups": []
 		},
 		{
-			"timeInterval": [30, 40],
-			"enemies": ["Rock_SuperGiant"],
-			"powerups": ["Random"]
+			"timeInterval": [2, 15],
+			"enemies": ["Rock_Medium", "Rock_Light", "Rock_Big", "Rock_Big"],
+			"powerups": ["Shield"]
 		},
 		{
-			"timeInterval": [60, 70],
-			"enemies": ["Rock_SuperGiant"],
+			"timeInterval": [15, 40],
+			"enemies": ["Rock_Medium", "Rock_Medium", "Rock_Light", "Rock_Light", "Rock_Light", "Rock_Big", "Rock_Big",
+				"Rock_Light", "Rock_Light", "Rock_Big"],
 			"powerups": []
 		}
 	]

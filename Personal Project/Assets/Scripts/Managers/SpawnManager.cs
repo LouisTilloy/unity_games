@@ -15,8 +15,9 @@ public enum ObjectToSpawn
 public class SpawnManager : MonoBehaviour
 {
     // Levels configuration
-    [SerializeField] string levelsDirectoryPath;
+    [SerializeField] InstanceJsonReader jsonReader;
     [SerializeField] float timeBeforeLevelTransition;
+
     // Levels internal variables
     List<Level> levelConfigs;
     int currentLevel = 1;
@@ -32,7 +33,7 @@ public class SpawnManager : MonoBehaviour
     bool levelLoading = false;
 
     // Rocks
-    [SerializeField] GameObject[] rocks;
+    public List<ObjectPooling> rocksPooling;
     [SerializeField] float xBaseSpawnPos1080p;
     float xSpawnPos;
     [SerializeField] List<float> initialUpBoosts;
@@ -64,16 +65,18 @@ public class SpawnManager : MonoBehaviour
         tagsOfInterest = SharedUtils.AllRockTags();
         tagsOfInterest.Add("Powerup");
 
-        levelConfigs = JsonReader.ReadAllLevels(levelsDirectoryPath);
+        levelConfigs = jsonReader.ReadAllLevels();
         ScaleSpawnPosWithScreen();
         EventsHandler.OnScreenResolutionChange += ScaleSpawnPosWithScreen;
 
         EventsHandler.InvokeOnLevelTransition(currentLevel);
     }
 
-
     void Update()
     {
+        // If levels are not loaded yet, wait until they are
+        if (levelConfigs == null) { return; }
+
         // Stop update loop until next level is loaded
         if (levelLoading) { return; }
 
@@ -125,17 +128,6 @@ public class SpawnManager : MonoBehaviour
         }
         return true;
         
-        /*
-        foreach (GameObject obj in allSpawnedObjects)
-        {
-            if (obj != null)
-            {
-                Debug.Log(obj.name);
-                return false;
-            }
-        }
-        return true;
-        */
     }
 
     bool LastChunkOfLevelOver()
@@ -166,25 +158,6 @@ public class SpawnManager : MonoBehaviour
 
         EventsHandler.InvokeOnLevelTransition(currentLevel);
     }
-
-    /*
-    void LoadNextLevel()
-    {
-        
-        if (not Shop and Last enemy is dead || Shop and Exit triggered)
-        {
-            Invoke endLevelEvent(int level)
-            Invoke newLevelEvent(int newLevel)
-            -- Within the events
-               Display: level complete!
-               Change background
-               Display: Level #  (the next level) or Shop
-        }
-        
-    }
-    */
-
-
 
     void AddToQueue(ObjectToSpawn objectToSpawn, int level, int levelChunk)
     {
@@ -241,19 +214,22 @@ public class SpawnManager : MonoBehaviour
     {
         // Choose if spawn from the right or from the left side.
         int randomDirection = UnityEngine.Random.Range(0, 2) * 2 - 1;  // -1 or 1
-        
-        // Instantiate the rock corresponding to the name at a given positon.
-        GameObject rockPrefab = rocks[SharedUtils.RockNameToPrefabIndex(rockName)];
+
+        // Get a pooled rock corresponding to the name at a given positon.
+        GameObject rock = rocksPooling[SharedUtils.RockNameToPrefabIndex(rockName)].GetPooledObject();
         Vector3 spawnPosition = new Vector3(
-            (xSpawnPos + rockPrefab.transform.localScale.x / 3) * randomDirection, 
-            RockSpawnYPosition(rockPrefab), 
-            rockPrefab.transform.position.z
+            (xSpawnPos + rock.transform.localScale.x / 3) * randomDirection, 
+            RockSpawnYPosition(rock),
+            rock.transform.position.z
         );
-        GameObject rock = Instantiate(rockPrefab, spawnPosition, Quaternion.identity);
+        rock.transform.position = spawnPosition;
+        Rigidbody rockRigidbody = rock.GetComponent<Rigidbody>();
+        rockRigidbody.velocity = Vector3.zero;
+        rock.SetActive(true);
 
         // Setup rock components, including original force and velocity.
         float initialUpBoost = initialUpBoosts[SharedUtils.RockNameToPrefabIndex(rockName)];
-        rock.GetComponent<Rigidbody>().AddForce(initialUpBoost * Vector3.up, ForceMode.Impulse);
+        rockRigidbody.AddForce(initialUpBoost * Vector3.up, ForceMode.Impulse);
         rock.GetComponent<MoveRight>().horizontalSpeed *= -1 * randomDirection;
         rock.GetComponent<BounceOnWall>().isScriptActive = false;
         
