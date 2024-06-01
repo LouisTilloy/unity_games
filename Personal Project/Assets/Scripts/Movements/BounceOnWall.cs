@@ -19,17 +19,20 @@ public class BounceOnWall : MonoBehaviour
 
     private void Update()
     {
+        // Between 1 and 10, it will just keep the boolean assigned at initialization.
+        if (Mathf.Abs(transform.position.x) < 1)
+        {
+            isScriptActive = true;
+        }
+
         // Deactivate collision with walls if the rock is not fully in the screen.
         if (!isScriptActive)
         {
             Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider);
             Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider);
         }
-
-        // Between 1 and 10, it will just keep the boolean assigned at initialization.
-        if (Mathf.Abs(transform.position.x) < 1)
+        else
         {
-            isScriptActive = true;
             // Activate collision with walls once the rock is towards the middle.
             Physics.IgnoreCollision(walls[0].GetComponent<Collider>(), thisCollider, false);
             Physics.IgnoreCollision(walls[1].GetComponent<Collider>(), thisCollider, false);

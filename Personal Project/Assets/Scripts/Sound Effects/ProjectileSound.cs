@@ -14,6 +14,7 @@ public class ProjectileSound : MonoBehaviour
     void playWithRandomPitch()
     {
         audioSource.pitch = Random.Range(pitchRandomRange[0], pitchRandomRange[1]);
+        audioSource.Stop();  // Seems to help with a bug with the pause menu and the audioSource not starting from t=0
         audioSource.Play();
     }
 

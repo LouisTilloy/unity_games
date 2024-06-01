@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     
     AudioSource[] allAudioSources;
     List<AudioSource> playingAudioSources;
+    List<float> playingTimes;
     GameObject pauseToolTips;
     GameObject playingToolTips;
     GameObject grayOverlay;
@@ -34,7 +35,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        if (pausingAvailable && Input.GetKeyDown(KeyCode.Escape))
+        if (pausingAvailable && Input.GetKeyDown(KeyCode.P))
         {
             PauseToggle();
         }
@@ -65,20 +66,26 @@ public class PauseMenu : MonoBehaviour
     void PausePlayingAudioSources()
     {
         playingAudioSources = new List<AudioSource>();
+        playingTimes = new List<float>();
         foreach (AudioSource source in allAudioSources)
         {
             if (source.isPlaying)
             {
                 playingAudioSources.Add(source);
-                source.Pause();
+                playingTimes.Add(source.time);
+                source.Stop();
             }
         }
     }
 
     void ResumePausedAudioSources()
     {
-        foreach (AudioSource source in playingAudioSources)
+        AudioSource source;
+        for (int sourceIndex = 0; sourceIndex < playingAudioSources.Count; sourceIndex++)
         {
+            source = playingAudioSources[sourceIndex];
+            source.Stop();  // Stopping again here seems to help with the pause/unpause bug removing sound
+            source.time = playingTimes[sourceIndex];  // This is only necessary as a workaround of a pause bug in WebGL
             source.Play();
         }
     }
