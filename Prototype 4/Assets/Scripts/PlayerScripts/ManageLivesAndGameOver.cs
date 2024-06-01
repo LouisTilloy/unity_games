@@ -18,14 +18,15 @@ public class ManageLivesAndGameOver : MonoBehaviour
     private string[] tagsToDestroy = { "Enemy", "Powerup Knockback", "Powerup Rockets", "Powerup Smash" , "Powerup Indicator", "Powerup Heart" };
 
     public TextMeshProUGUI gameOverText;
-    [SerializeField]
-    private AudioSource loseLifeAudio;
-    private Rigidbody playerRigidbody;
+    public GameObject restartButton;
+    [SerializeField] AudioSource loseLifeAudio;
+    Rigidbody playerRigidbody;
     // Start is called before the first frame update
     void Start()
     {
         lives = maxLives;
         gameOverText.enabled = false;
+        restartButton.SetActive(false);
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
@@ -71,8 +72,9 @@ public class ManageLivesAndGameOver : MonoBehaviour
 
     void GameOver()
     {
-        // Display Game-Over Text
+        // Display Game-Over Text and restart button
         gameOverText.enabled = true;
+        restartButton.SetActive(true);
 
         // Switch to Game-Over Music
         GameObject.Find("Main Camera").GetComponent<MusicSwitch>().transitionGameOverMusic();
