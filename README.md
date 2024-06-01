@@ -5,4 +5,6 @@ _All assets used in these games are royalty-free._
 
 Click on any game bellow to play!
 
-[![./readme_docs/game.jpg]](https://luigi-dev-games.itch.io/split-rock)
+<a href="https://luigi-dev-games.itch.io/split-rock">
+	<img src="./images/game_with_title.png" alt="drawing" width="300"/>
+</a>
