@@ -14,11 +14,15 @@ public enum ObjectToSpawn
 
 public class SpawnManager : MonoBehaviour
 {
+    // Shop configuration
+    [SerializeField] ShopManager shopManager;
+    
     // Levels configuration
     [SerializeField] InstanceJsonReader jsonReader;
     [SerializeField] float timeBeforeLevelTransition;
 
     // Levels internal variables
+    bool shopVisitedThisLevel = false;
     List<Level> levelConfigs;
     int currentLevel = 1;
     int currentLevelChunk = 0;  // level chunks start at 1, so this is firstLevelChunk - 1
@@ -80,6 +84,9 @@ public class SpawnManager : MonoBehaviour
         // Stop update loop until next level is loaded
         if (levelLoading) { return; }
 
+        // If the shop is active, stop update loop until it is not
+        if (shopManager.isShopActive) { return; }
+
         // Levels handling - (levels start at 1, not 0)
         // - If we are within the next chunk time interval, start the next chunk of the level.
         if (NextLevelChunkIsDue())
@@ -111,7 +118,16 @@ public class SpawnManager : MonoBehaviour
         // If no more enemies and powerups are present switch to the next level.
         if (LastChunkOfLevelOver() && AllSpawnedObjectsDestroyed())
         {
-            StartCoroutine(LoadNextLevelAfterTime(timeBeforeLevelTransition));
+            // If this level has a shop that has not been visited yet, activate it
+            if (SharedUtils.IsElementInList(currentLevel, shopManager.shopLevels) && !shopVisitedThisLevel)
+            {
+                StartCoroutine(LoadShopAfterTime(timeBeforeLevelTransition));
+            }
+            // Otherwise load the next level
+            else
+            {
+                StartCoroutine(LoadNextLevelAfterTime(timeBeforeLevelTransition));
+            }
         }
 
         clockTime += Time.deltaTime;
@@ -155,8 +171,17 @@ public class SpawnManager : MonoBehaviour
         currentLevel++;
         currentLevelChunk = 0;
         levelLoading = false;
+        shopVisitedThisLevel = false;
 
         EventsHandler.InvokeOnLevelTransition(currentLevel);
+    }
+
+    IEnumerator LoadShopAfterTime(float time)
+    {
+        shopManager.isShopActive = true;
+        yield return new WaitForSeconds(time);
+        EventsHandler.InvokeOnLevelTransition(-1);
+        shopVisitedThisLevel = true;
     }
 
     void AddToQueue(ObjectToSpawn objectToSpawn, int level, int levelChunk)
@@ -248,7 +273,7 @@ public class SpawnManager : MonoBehaviour
 
         ApplyPowerUpOnCollision powerupScript = powerup.GetComponent<ApplyPowerUpOnCollision>();
         powerupScript.powerupManager = powerupManager;
-        powerupScript.SetIndex(powerupIndex);
+        // powerupScript.SetIndex(powerupIndex);
 
         return powerup;
     }

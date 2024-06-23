@@ -8,12 +8,22 @@ using UnityEngine;
 
 public class SharedUtils
 {
+    public static bool IsElementInList(int element, List<int> elementList)
+    {
+        foreach (int el in elementList)
+        {
+            if (el == element)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public static List<string> AllRockTags()
     {
         return new List<string> { "Rock_Light", "Rock_Medium", "Rock_Big", "Rock_Giant", "Rock_SuperGiant", "Rock_UltraGiant", "Rock_MegaGiant" };
     }
-
 
     public static IEnumerator WaitDisplayAndFade(
         GameObject textObject, TextMeshProUGUI textComponent, float waitTime, float displayTime, float fadeTime

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.VisualScripting.Member;
 
 public class PowerupGrabSound : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PowerupGrabSound : MonoBehaviour
     void PlayPowerupGrabSound(int powerupIndex)
     {
         audioSource.clip = powerupGrabClips[powerupIndex];
+        audioSource.Stop();  // Stopping here seems to help with the pause/unpause bug removing sound
         audioSource.Play();
     }
 

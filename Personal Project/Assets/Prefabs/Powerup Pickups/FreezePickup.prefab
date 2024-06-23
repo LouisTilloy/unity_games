@@ -118,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe7fdfe8f41214f4e89da1f4641f04f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 0
   horizontalSpeed: 2
-  rotate: 0
 --- !u!114 &5194890464360296438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupManager: {fileID: 0}
-  powerupIndex: 0
+  powerupIndex: 1
 --- !u!114 &1089662875241718102
 MonoBehaviour:
   m_ObjectHideFlags: 0
