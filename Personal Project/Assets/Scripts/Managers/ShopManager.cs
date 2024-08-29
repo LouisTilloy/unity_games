@@ -9,13 +9,15 @@ public class ShopManager : MonoBehaviour
     public bool isShopActive;
     public List<int> shopLevels;
 
+    [SerializeField] float timeBeforeShopAutoCloses;
     [SerializeField] List<GameObject> powerupPrefabs;
     [SerializeField] List<Vector3> powerupSpawnPosition;
     [SerializeField] PowerupManager powerupManager;
+    [SerializeField] PlayerController playerController;
     [SerializeField] float timeBeforeSpawn;
 
     bool isShopInitalized = false;
-    
+    float timeSinceShopOppened = 0.0f;
     List<GameObject> shopSpawnedPowerups;
 
     void Start()
@@ -33,6 +35,7 @@ public class ShopManager : MonoBehaviour
             
         } 
 
+        // Close shop if one of the powerup was chosen
         foreach(GameObject powerup in shopSpawnedPowerups)
         {
             if (powerup == null)
@@ -41,6 +44,14 @@ public class ShopManager : MonoBehaviour
                 return;
             }
         }
+
+        // Otherwise close shop if a long time has passed to prevent soft lock
+        if (timeSinceShopOppened > timeBeforeShopAutoCloses)
+        {
+            CloseShop();
+        }
+
+        timeSinceShopOppened += Time.deltaTime;
     }
 
     void SpawnPowerups()
@@ -64,6 +75,7 @@ public class ShopManager : MonoBehaviour
     IEnumerator DelayedOpenSteps(float time)
     {
         yield return new WaitForSeconds(time);
+        playerController.DeleteAllActiveProjectiles();
         SpawnPowerups();
     }
 

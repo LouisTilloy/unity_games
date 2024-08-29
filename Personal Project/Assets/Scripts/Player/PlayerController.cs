@@ -23,6 +23,14 @@ public class PlayerController : MonoBehaviour
         return powerupManager.powerupLevels[0] + 1;
     }
 
+    public void DeleteAllActiveProjectiles()
+    {
+        foreach (GameObject projectile in launchedProjectiles)
+        {
+            projectile.SetActive(false);
+        }
+    }
+
     void Update()
     {
         // Left and right movement

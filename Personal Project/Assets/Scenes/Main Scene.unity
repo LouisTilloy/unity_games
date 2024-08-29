@@ -2439,6 +2439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isShopActive: 0
   shopLevels: 02000000050000000a0000000f00000013000000
+  timeBeforeShopAutoCloses: 60
   powerupPrefabs:
   - {fileID: 7344760843025133055, guid: 4ae6140a26ab33242b9dcbb463d13c46, type: 3}
   - {fileID: 2295259945782633029, guid: b05b7fb34c41ce840a96fc9663ea5286, type: 3}
@@ -2446,6 +2447,7 @@ MonoBehaviour:
   - {x: 4, y: 4, z: 0}
   - {x: -4, y: 4, z: 0}
   powerupManager: {fileID: 956803850}
+  playerController: {fileID: 956803860}
   timeBeforeSpawn: 3
 --- !u!1 &529261190
 GameObject:
@@ -3875,6 +3877,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3f1f403883fecc4599ec23091086122, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &956803860 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1753155762072491689, guid: fafae906fed0ef745897f88b9e22a117, type: 3}
+  m_PrefabInstance: {fileID: 7920183505810704448}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 956803827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c845c4ce3d7a4489ce05e10bcff226, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &963194225
