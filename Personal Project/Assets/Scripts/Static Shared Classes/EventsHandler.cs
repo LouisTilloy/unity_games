@@ -12,6 +12,7 @@ public class EventsHandler : MonoBehaviour
     public static event GeneralEventHandler OnRockBroken;
     public static event GeneralEventHandler OnProjectileShot;
     public static event GeneralEventHandler OnScreenResolutionChange;
+    public static event GeneralEventHandler OnWin;
 
     public delegate void IntEventHandler(int param);
     public static event IntEventHandler OnPowerupGrab;
@@ -84,5 +85,10 @@ public class EventsHandler : MonoBehaviour
     public static void InvokeOnLevelTransition(int nextLevel)
     {
         OnLevelTransition?.Invoke(nextLevel);
+    }
+
+    public static void InvokeOnWin()
+    {
+        OnWin?.Invoke();
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InstanceJsonReader : MonoBehaviour
 {
+    [SerializeField] bool debugMode;
     [SerializeField] List<TextAsset> levelJsons;
 
     public Level ReadLevelJson(TextAsset jsonFile)
@@ -15,6 +16,12 @@ public class InstanceJsonReader : MonoBehaviour
     public List<Level> ReadAllLevels()
     {
         List<Level> allLevels = new List<Level>();
+        
+        if (debugMode)
+        {
+            levelJsons = new List<TextAsset>(levelJsons.Take(1));
+        }
+
         foreach (TextAsset jsonFile in levelJsons)
         {
             allLevels.Add(JsonUtility.FromJson<Level>(jsonFile.text));

@@ -78,6 +78,14 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
+        // If the level is past the maximum level, it means the player won.
+        if (currentLevel == levelConfigs.Count + 1)
+        {
+            EventsHandler.InvokeOnWin();
+            Destroy(gameObject);
+            return;
+        }
+        
         // If levels are not loaded yet, wait until they are
         if (levelConfigs == null) { return; }
 
@@ -173,7 +181,11 @@ public class SpawnManager : MonoBehaviour
         levelLoading = false;
         shopVisitedThisLevel = false;
 
-        EventsHandler.InvokeOnLevelTransition(currentLevel);
+        // If this is was not the last level, make a level transition
+        if (currentLevel <= levelConfigs.Count)
+        {
+            EventsHandler.InvokeOnLevelTransition(currentLevel);
+        }
     }
 
     IEnumerator LoadShopAfterTime(float time)
