@@ -14,8 +14,20 @@ using FightLogs = System.Collections.Generic.List<string>;
 public class BattleManager : MonoBehaviour
 {
     const int MAX_FIGHT_ITERATIONS = 1000;
+    [SerializeField] float timeBeforeStart = 4;
     [SerializeField] float fightSpeed;
     [SerializeField] bool launchFight = false;
+
+    private void OnEnable()
+    {
+        StartCoroutine(WaitAndLaunchFight());
+    }
+
+    IEnumerator WaitAndLaunchFight()
+    {
+        yield return new WaitForSeconds(timeBeforeStart);
+        launchFight = true;
+    }
 
     private void Update()
     {

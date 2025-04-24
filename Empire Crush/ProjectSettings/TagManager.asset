@@ -7,6 +7,7 @@ TagManager:
   - tooltip
   - CityFightManager
   - homeTown
+  - confirmScreen
   layers:
   - Default
   - TransparentFX

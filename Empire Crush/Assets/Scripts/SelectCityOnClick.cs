@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class SelectCityOnClick : MonoBehaviour
 {
-    public bool mouseHovering = false;
-    string managerTag = "CityFightManager";
-    CityFightManager cityFightManager;
+    // Assigned in the Unity editor for the home town, loaded at runtime for the others.
+    public AttackConfirm confirmScreenScript;
+    // Data of the city attached to this object.
     CityData cityData;
+    // Internal logic variables
+    public bool mouseHovering = false;
     public bool selected = false;
 
     void Start()
     {
-        cityFightManager = GameObject.FindGameObjectWithTag(managerTag).GetComponent<CityFightManager>();
         cityData = GetComponent<CityData>();
     }
 
@@ -45,8 +46,10 @@ public class SelectCityOnClick : MonoBehaviour
         {   
             if (!cityData.isFriendly)
             {
-                Debug.Log("cityFightManager.CityFight(GetComponent<CityData>());");
-                cityFightManager.CityFight(GetComponent<CityData>());
+                GameObject homeTown = GameObject.FindGameObjectWithTag("homeTown");
+                CityData homeTownData = homeTown.GetComponent<CityData>();
+                confirmScreenScript = homeTown.GetComponent<SelectCityOnClick>().confirmScreenScript;
+                confirmScreenScript.SetActiveWithParams(homeTownData.nSoldiers, cityData.nSoldiers);
             }
             selected = false;
         }

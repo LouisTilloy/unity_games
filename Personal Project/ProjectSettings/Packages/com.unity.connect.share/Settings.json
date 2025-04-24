@@ -4,7 +4,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"C:/Users/louis/OneDrive/Documents/2023_unity_create_with_code_course/Personal Project/build;C:/Users/louis/OneDrive/Documents/2023_unity_create_with_code_course/Personal Project/builds;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"C:/Users/louis/OneDrive/Documents/unity_projects/Personal Project/build;C:/Users/louis/OneDrive/Documents/2023_unity_create_with_code_course/Personal Project/build;C:/Users/louis/OneDrive/Documents/2023_unity_create_with_code_course/Personal Project/builds;;;;;;;\"}"
             }
         ]
     }

@@ -9,20 +9,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 160951163007372014, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
+      propertyPath: armor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 160951163007372014, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
       propertyPath: friendly
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 160951163007372014, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
       propertyPath: maxHealth
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 160951163007372014, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
       propertyPath: currentHealth
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 265078131690102572, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
       propertyPath: m_Name
-      value: Enemy Soldier Variant
+      value: Enemy Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 3202234111976633965, guid: a4853fecdaa660343bd3f3b4ada0fb8a, type: 3}
       propertyPath: m_LocalPosition.x

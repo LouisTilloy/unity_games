@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3202234111976633965}
   - component: {fileID: 160951163007372014}
   m_Layer: 0
-  m_Name: Soldier
+  m_Name: Friendly Soldier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,9 +132,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   friendly: 1
   attack: 2
-  armor: 1
-  maxHealth: 5
-  currentHealth: 5
+  armor: 0
+  maxHealth: 4
+  currentHealth: 4
 --- !u!1 &4599137612660044677
 GameObject:
   m_ObjectHideFlags: 0
